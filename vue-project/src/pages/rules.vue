@@ -24,6 +24,7 @@
   
   <style lang="less">
   .page-rules {
+    margin-top: 100px;
     &__container {
       .container();
     }

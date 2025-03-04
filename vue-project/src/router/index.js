@@ -9,9 +9,9 @@ const routes = [
     component: HomePage,
   },
   {
-    path: "/contacts",
-    name: "contacts",
-    component: () => import("@/pages/contacts.vue"),
+    path: "/personalaccount",
+    name: "personalaccount",
+    component: () => import("@/pages/PersonalAccount.vue"),
   },
   {
     path: "/rules",

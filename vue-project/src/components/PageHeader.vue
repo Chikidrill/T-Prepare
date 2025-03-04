@@ -16,7 +16,7 @@ export default {
       },
       {
         title: "Личный кабинет",
-        path: "/contacts",
+        path: "/personalaccount",
         query: {
           address: "Томск, ул. Красноармейская, 146",
           email: "idat@tusur.ru",
@@ -69,7 +69,7 @@ export default {
   z-index: 100;
   &__container {
     .container();
-    height: 130px;
+    height: 110px;
     display: flex;
   }
 
