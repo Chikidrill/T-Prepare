@@ -21,8 +21,14 @@
             tprepare@email.ru
           </span>
         </p>
- 
+        <div class="page-contacts__map-container">
+            <div class="page-contacts__map">
+                <img src="@/assets/map.png" alt="Map" />
+            </div>
+            
+        </div>
       </div>
+      
     </div>
   </template>
   
@@ -42,6 +48,7 @@ export default {
       }
     
       &__title {
+        width: 450px;
         margin-bottom: 35px;
         color: @black;
         font-size: 40px;
@@ -49,6 +56,7 @@ export default {
     
       &__text {
         font:@font1;
+        width: 500px;
         font-size: 20px;
         margin-top: 5px;
         font-weight: 700;
@@ -56,8 +64,10 @@ export default {
     
       &__text-regular {
         font: @font3;
+        width: 500px;
         font-weight: 400;
         margin-left: 5px;
       }
+
     }
     </style>

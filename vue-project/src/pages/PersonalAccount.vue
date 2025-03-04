@@ -19,14 +19,14 @@
     </div>
     </div>
 
-    <div class="question-block">
+    <!-- <div class="question-block">
       <QuestionCard
         :subject-id="subject.id"
         :subject-name="subject.name"
         :question-count="subject.questionCount"
         :creation-date="subject.creationDate"
       />
-    </div>
+    </div> -->
   </main>
 </template>
   
@@ -46,7 +46,7 @@ export default {
       display: flex;
     }
     &__introduction-text{
-      @font1;
+      font: @font1;
       font-size:100px;
       padding-right: 100px;
     }
@@ -57,11 +57,11 @@ export default {
       margin-top: 20px;
     }
     &__user1{
-      @font1;
+      font: @font1;
       font-size: 100px;
     }
     &__user-text{
-      @font3;
+      font: @font1;
       font-size: 100px;
     }
   }
