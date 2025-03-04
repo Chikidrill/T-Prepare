@@ -18,10 +18,7 @@
   </template>
   
 <script>
-
-  
   export default {
-
   };
 </script>
 <style lang="less">
@@ -31,7 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; // Задаем высоту экрана
+
 
   &__container {
     display: flex;
@@ -46,6 +43,7 @@
     align-items: center;
     justify-content: center; // Центрирование по вертикали
     text-align: center;
+    margin-bottom: 550px;
   }
 
   &__about-text1 {
