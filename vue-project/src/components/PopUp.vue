@@ -48,6 +48,11 @@ export default {
   border-radius: 20px;
   border: none;
   cursor: pointer;
+  transition: all 0.5s ease ;
+    &:hover{
+      background-color: @black;
+      color: @white;
+    }
 }
 }
 </style>
