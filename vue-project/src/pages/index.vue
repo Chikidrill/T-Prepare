@@ -13,9 +13,12 @@
         <p class="page-home__text2">
           Достигни максимальных результатов на экзаменах и забудь о бесконечной зубрёжке
         </p>
-        <button class="page-home__startbtn">
+        <router-link to="personalaccount">
+          <button class="page-home__startbtn">
           Начать подготовку
         </button>
+        </router-link>
+        
       </div>
       <div class="page-home__problem">
         <img class="page-home__problem-image" src="@/assets/dislike.png" />

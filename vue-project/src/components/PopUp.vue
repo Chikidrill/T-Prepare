@@ -1,7 +1,7 @@
 <template>
   <div class="popup">
     <div class="popup__content">
-      <h2>Выбранный предмет: {{ subjectName }}</h2> <!-- Выводим название предмета -->
+      <h2>Выбранный предмет: {{ subjectName }}</h2> 
       <button class="close-btn" @click="close">Закрыть</button>
     </div>
   </div>
@@ -10,11 +10,11 @@
 <script>
 export default {
   props: {
-    subjectName: String, // Пропс для получения названия предмета
+    subjectName: String, 
   },
   methods: {
     close() {
-      this.$emit('close'); // Закрытие попапа
+      this.$emit('close'); 
     }
   }
 };
