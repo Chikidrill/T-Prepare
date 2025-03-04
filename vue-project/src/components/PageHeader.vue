@@ -43,7 +43,7 @@ export default {
             :key="tab.path"
             type="button"
             class="page-header__nav-item"
-            :to="{ path: tab.path, query: tab.query }"
+            :to="{ path: tab.path}"
           >
             {{ tab.title }}
           </RouterLink>

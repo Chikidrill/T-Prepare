@@ -5,39 +5,33 @@
   
         <p class="page-contacts__text">
           Адрес:
-          <span class="page-contacts__text-italic">
-            {{ query.address || "г. Томск, Пушкина 65/1" }}
+          <span class="page-contacts__text-regular">
+            г. Томск, улица Красноармейская, д.146, ауд. 205
           </span>
         </p>
         <p class="page-contacts__text">
           Телефон:
-          <span class="page-contacts__text-italic">
-            {{ query.phone || "+7 499 350 0730" }}
+          <span class="page-contacts__text-regular">
+            +8 (800) 555 35-35
           </span>
         </p>
         <p class="page-contacts__text">
           Email:
-          <span class="page-contacts__text-italic">
-            {{ query.email || "hi@tagree.ru" }}
+          <span class="page-contacts__text-regular">
+            tprepare@email.ru
           </span>
         </p>
+ 
       </div>
     </div>
   </template>
   
   <script>
-  import { mapStores } from "pinia";
-  import { useUserStore } from '@/store/user';
-  
-  export default {
-    computed: {
-      ...mapStores(useUserStore),
-      query() {
-        return this.$route.query;
-      },
-    },
-  };
-  </script>
+
+export default {
+
+};
+</script>
     
     <style lang="less">
     .page-contacts {
@@ -48,17 +42,20 @@
       }
     
       &__title {
-        margin-bottom: 15px;
-        color: @light_orange;
+        margin-bottom: 35px;
+        color: @black;
+        font-size: 40px;
       }
     
       &__text {
+        font:@font1;
+        font-size: 20px;
         margin-top: 5px;
         font-weight: 700;
       }
     
-      &__text-italic {
-        font-style: italic;
+      &__text-regular {
+        font: @font3;
         font-weight: 400;
         margin-left: 5px;
       }
