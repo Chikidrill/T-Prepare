@@ -1,8 +1,9 @@
 <template>
-    <div class="page-contacts">
-      <div class="page-contacts__container">
+  <div class="page-contacts">
+    <div class="page-contacts__container">
+      <div class="page-contacts__info">
         <h2 class="page-contacts__title">Контакты</h2>
-  
+
         <p class="page-contacts__text">
           Адрес:
           <span class="page-contacts__text-regular">
@@ -21,53 +22,59 @@
             tprepare@email.ru
           </span>
         </p>
-        <div class="page-contacts__map-container">
-            <div class="page-contacts__map">
-                <img src="@/assets/map.png" alt="Map" />
-            </div>
-            
-        </div>
       </div>
-      
+
+      <div class="page-contacts__map">
+        <img src="@/assets/map.png" alt="Карта" />
+      </div>
     </div>
-  </template>
-  
-  <script>
+  </div>
+</template>
 
-export default {
-
-};
+<script>
+export default {};
 </script>
-    
-    <style lang="less">
-    .page-contacts {
-        margin-top: 100px;
-      &__container {
-        .container();
-        margin-top: 20px;
-      }
-    
-      &__title {
-        width: 450px;
-        margin-bottom: 35px;
-        color: @black;
-        font-size: 40px;
-      }
-    
-      &__text {
-        font:@font1;
-        width: 500px;
-        font-size: 20px;
-        margin-top: 5px;
-        font-weight: 700;
-      }
-    
-      &__text-regular {
-        font: @font3;
-        width: 500px;
-        font-weight: 400;
-        margin-left: 5px;
-      }
 
+<style lang="less">
+.page-contacts {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh; /* Делаем страницу на всю высоту */
+  padding: 0 160px; /* Отступы только слева и справа */
+  
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 100px;
+  }
+  &__title {
+    margin-bottom: 35px;
+    color: @black;
+    font-size: 40px;
+  }
+
+  &__text {
+    font: @font1;
+    font-size: 20px;
+    margin-top: 5px;
+    font-weight: 700;
+  }
+
+  &__text-regular {
+    font: @font3;
+    font-weight: 400;
+    margin-left: 5px;
+  }
+
+  &__map {
+    display: flex;
+    justify-content: flex-end;
+    
+    img {
+      max-width: 550px; /* Уменьшаем размер карты */
+      height: auto;
     }
-    </style>
+  }
+}
+</style>
