@@ -25,10 +25,10 @@ export default {
 </script>
 
 <template>
-    <header class="page-header">
-      <div class="page-header__container">
-        <div class="page-header__logo-wrap">
-            <div class="page-header__logo"> 
+    <footer class="page-footer">
+      <div class="page-footer__container">
+        <div class="page-footer__logo-wrap">
+            <div class="page-footer__logo"> 
               <svg width="300" height="70" viewBox="0 0 406 95" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 13H23.0835C28.9127 13 34.5031 15.2413 38.625 19.2308C42.7469 23.2203 45.0625 28.6312 45.0625 34.2732V69.0769H57.9375V34.2732C57.9375 28.6312 60.2531 23.2203 64.375 19.2308C68.4969 15.2413 74.0873 13 79.9164 13H103V81.5385H70.8125L57.9375 94H45.0625L32.1875 81.5385H0V13Z" fill="white"/>
               <path d="M59.6904 82H44.3096V36.7363H28.4014V23.6846H75.6426V36.7363H59.6904V82Z" fill="black"/>
@@ -37,51 +37,49 @@ export default {
             </div>
         </div>
   
-        <nav class="page-header__nav">
+        <nav class="page-footer__nav">
           <RouterLink
             v-for="tab in tabs"
             :key="tab.path"
             type="button"
-            class="page-header__nav-item"
+            class="page-footer__nav-item"
             :to="{ path: tab.path}"
           >
             {{ tab.title }}
           </RouterLink>
       </nav>
       </div>
-    </header>
+    </footer>
 </template>
 
-
-
 <style lang="less">
-.page-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: @yellow;
-  z-index: 100;
-  &__container {
-    .container();
-    height: 110px;
-    display: flex;
-  }
-
-  &__logo-wrap {
+.page-footer{
+    padding-left: 80px;
+    padding-right: 60px;
+    &__container{
+        display: flex;
+        padding-left: 160px;
+        padding-right: 160px;
+        padding-bottom: 10px;
+    }
+    background-color: @yellow;
+    &__logo-wrap {
     display: flex;
     padding-top: 18px;
   }
   &__nav {
     display: flex;
-    padding-top: 53px;
+    flex-direction: column;
+    text-align: right;
+    padding-top: 26px;
+    justify-content: center;
     margin-left: auto;
   }
-
+  
   &__nav-item {
     color: @black;
     font: @font3;
-    font-size: 20px;
+    font-size: 15px;
     letter-spacing: 1px;
     text-decoration: none;
     text-transform: uppercase;
@@ -96,12 +94,7 @@ export default {
         color: @white;
       }
     }
-
-    &:active,
-    &--active,
-    &.router-link-exact-active {
-      font-weight: bold;
-    }
   }
 }
+
 </style>
