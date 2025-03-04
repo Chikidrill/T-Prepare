@@ -12,17 +12,12 @@ export default {
       },
       {
         title: "Контакты",
-        path: "/rules",
-      },
+        path: "/contacts",
+      }, 
       {
         title: "Личный кабинет",
         path: "/personalaccount",
-        query: {
-          address: "Томск, ул. Красноармейская, 146",
-          email: "idat@tusur.ru",
-          phone: "+79138842715",
-        },
-      },
+      }
     ]
     };
   },
