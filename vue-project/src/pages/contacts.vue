@@ -55,14 +55,14 @@ export default {};
   }
 
   &__text {
-    font: @font1;
+    font-family: @font1;
     font-size: 20px;
     margin-top: 5px;
     font-weight: 700;
   }
 
   &__text-regular {
-    font: @font3;
+    font-family: @font3;
     font-weight: 400;
     margin-left: 5px;
   }

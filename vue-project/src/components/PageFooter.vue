@@ -78,7 +78,7 @@ export default {
   
   &__nav-item {
     color: @black;
-    font: @font3;
+    font-family: @font3;
     font-size: 15px;
     letter-spacing: 1px;
     text-decoration: none;

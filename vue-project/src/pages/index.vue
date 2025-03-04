@@ -85,26 +85,26 @@ export default {
   }
 
   &__text1 {
-    font: @font1;
+    font-family: @font1;
     font-size: 100px;
     font-weight: 700;
     margin-bottom: 35px;
   }
 
   &__text2 {
-    font: @font3;
+    font-family: @font3;
     font-size: 30px;
     font-weight: 400;
     margin-top: 0; // Убираем лишний отступ, если он есть
   }
   &__startbtn{
-    font: @font3;
+    font-family: @font3;
     font-size: 20px;
     font-weight: 400;
     background-color: @yellow;
     border-radius: 25px;
     padding: 29px 65px;
-    transition: all 1s ease ;
+    transition: all 0.5s ease ;
     &:hover{
       background-color: @black;
       color: @white;
@@ -122,7 +122,7 @@ export default {
     height: 350px;
   }
   &__problem-text{
-    font: @font3;
+    font-family: @font3;
     font-size: 30px;
     font-weight: 400;
     margin-top: 0;
@@ -142,7 +142,7 @@ export default {
     height: 350px;
   }
   &__solve-text{
-    font: @font3;
+    font-family: @font3;
     font-size: 30px;
     font-weight: 400;
     margin-top: 0;

@@ -80,7 +80,7 @@ export default {
 
   &__nav-item {
     color: @black;
-    font: @font3;
+    font-family: @font3;
     font-size: 20px;
     letter-spacing: 1px;
     text-decoration: none;
@@ -100,7 +100,7 @@ export default {
     &:active,
     &--active,
     &.router-link-exact-active {
-      font-weight: bold;
+      font-family: @font1;
     }
   }
 }
