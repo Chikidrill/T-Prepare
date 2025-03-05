@@ -13,12 +13,13 @@
         <p class="page-home__text2">
           Достигни максимальных результатов на экзаменах и забудь о бесконечной зубрёжке
         </p>
-        <router-link to="personalaccount">
-          <button class="page-home__startbtn">
+        <button class="page-home__startbtn" @click="openLoginPopup">
           Начать подготовку
         </button>
-        </router-link>
-        
+
+         <LoginPopup v-if="isLoginPopupVisible" @close="isLoginPopupVisible = false"/>
+
+         <div v-if="isLoginPopupVisible" class="blur-background"></div>
       </div>
       <div class="page-home__problem">
         <img class="page-home__problem-image" src="@/assets/dislike.png" />
@@ -47,7 +48,22 @@
 </template>
 
 <script>
+import LoginPopup from '@/components/LoginPopUp.vue';
+
 export default {
+  components: {
+    LoginPopup, 
+  },
+  data() {
+    return {
+      isLoginPopupVisible: false, 
+    };
+  },
+  methods: {
+    openLoginPopup() {
+      this.isLoginPopupVisible = true; 
+    },
+  },
 };
 </script>
 <style lang="less">
@@ -152,6 +168,17 @@ export default {
     text-align: left; /* Выравниваем текст справа */
     max-width: 500px; /* Ограничиваем ширину текста */
   }
+
+  .blur-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  backdrop-filter: blur(5px); 
+  z-index: 999; 
+}
 }
 
 </style>

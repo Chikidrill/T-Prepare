@@ -18,6 +18,11 @@ const routes = [
     name: "contacts",
     component: () => import("@/pages/contacts.vue"),
   },
+  {
+    path: "/registration",
+    name: "registration",
+    component: () => import("@/pages/Registration.vue"),
+  }
 ];
 
 const router = createRouter({
