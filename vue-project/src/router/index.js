@@ -22,7 +22,7 @@ const routes = [
     path: "/registration",
     name: "registration",
     component: () => import("@/pages/Registration.vue"),
-  }
+  },
   {
     path: "/exam",
     name: "exam",
