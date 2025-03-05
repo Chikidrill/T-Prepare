@@ -3,7 +3,7 @@
       <div class="upload-popup__content">
         <p class="upload-popup__title">Добавить вопросы</p>
         <label for="subjectName" class="upload"> Введите название блока вопросов:
-            <input type="text" class="upload__input" placeholder="Программирование">
+            <input v-model="subjectName" type="text" class="upload__input" placeholder="Программирование">
             <div class="upload__image">
                 <img class="upload__image1 image" src="@/assets/upload.png" alt="Загрузить файлы" />
                 <img class="upload__image2 image" src="@/assets/upload2.png" alt="Загрузить файлы" />
@@ -15,7 +15,7 @@
           </svg>
         </button>
         <div class="upload-popup__buttons">
-            <button class="upload__btn btn">Загрузить в формате QuizAI</button>
+            <button class="upload__btn btn" @click="addSubject">Загрузить в формате QuizAI</button>
             <button class="upload__btn-alt btn">Загрузить в формате самопроверки</button>
         </div>
         
@@ -26,8 +26,21 @@
   <script>
   export default {
     data() {
-      
+      return{
+        subjectName: '',
+      };
     },
+    methods: {
+    addSubject() {
+      if (this.subjectName) {
+        this.$emit('add-subject', this.subjectName);  // Отправляем название блока вверх в родительский компонент
+        this.subjectName = '';  // Очистим поле ввода
+        this.$emit('close'); // Закрываем попап
+      } else {
+        alert('Введите название блока!');
+      }
+    }
+  }
   };
   </script>
   

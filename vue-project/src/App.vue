@@ -24,7 +24,6 @@ export default {
 </script>
 
 <style>
-
 /* Плавный переход без резкого обрыва */
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.6s; /* Дольше, мягче */

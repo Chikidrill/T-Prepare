@@ -38,11 +38,12 @@
 
       <div class="button-container">
         <button @click="openPopup(subject)" class="pp-btn">Открыть вопросы для блока "{{ subject.name }}"</button>
+        <button @click="deleteSubject(subject.id)" class="delete-btn pp-btn">Удалить</button>
       </div>
 
     </div>
     <Popup v-if="isPopupOpen" :subject-name="selectedSubject?.name" :questions="selectedSubject?.questions" @close="closePopup" />
-    <UploadPopUp v-if="isUploadPopupVisible" @close="isUploadPopupVisible = false" />
+    <UploadPopUp v-if="isUploadPopupVisible" @close="isUploadPopupVisible = false" @addSubject="addNewSubject" />
     <div class ="background-img">
       <img src = @/assets/background2.png/>
     </div>
@@ -65,14 +66,14 @@ export default {
           id: 1,
           name: 'Программирование',
           creationDate: '04.03.2025',
-          questionCount:'23',
+          questionCount: '23',
           questions: ['Что такое переменная?', 'Как работает if?', 'Разница между let и const?', 'Какой язык программирования самый...']
         },
         {
           id: 2,
           name: 'Математика',
           creationDate: '04.03.2025',
-          questionCount:'23',
+          questionCount: '23',
           questions: ['Что такое производная?', 'Как решать квадратные уравнения?', 'Определение синуса и косинуса?', 'Как вычислить интеграл от ...']
         }
       ],
@@ -88,15 +89,31 @@ export default {
     },
     closePopup() {
       this.isPopupOpen = false;
+    },
+    addNewSubject(subjectName) {
+      const newSubject = {
+        id: this.subjects.length + 1, // Увеличиваем id
+        name: subjectName,
+        creationDate: new Date().toLocaleDateString(),
+        questionCount: '0',
+        questions: [] // Здесь можно добавить логику для создания пустого массива вопросов
+      };
+      this.subjects.push(newSubject); // Добавляем новый блок в массив
+    },
+    deleteSubject(subjectId) {
+      // Удаляем блок из массива subjects по id
+      this.subjects = this.subjects.filter(subject => subject.id !== subjectId);
     }
   }
 };
 </script>
 
+
 <style lang="less">
 .button-container {
   display: flex;
   justify-content: flex-end; /* Выравнивание кнопки вправо */
+  gap: 50px;
 }
 .pp-btn {
   padding: 10px 15px;
