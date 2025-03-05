@@ -49,10 +49,8 @@
     &__buttons{
         display: flex;
         flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  align-content: space-between;
+        justify-content: space-around;
+        
     }
  &__content {
     position: relative; 
@@ -76,12 +74,11 @@
     }
 
     &__image {
-       
         display: flex;
         justify-content: flex-start; /* Прижимает изображение влево */
         align-items: center; /* Выравнивает по центру вертикально */
         margin-top: 10px;
-        
+        cursor: pointer;
     }
     &__image1{
         padding-right: 50px;
@@ -90,11 +87,12 @@
         margin-top: 30px;
         padding-left: 20px;
         padding-right: 20px;
-        padding: 12px 17px;
-        margin-right: 50px;
+        padding: 12px 37px;
+
     }
     &__btn-alt{
         margin-top: 30px;
+        //margin-left: 50px;
         background-color: @white;
         border:2px solid black;
     }
