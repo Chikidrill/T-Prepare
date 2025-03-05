@@ -2,7 +2,11 @@
   <div class="popup">
     <div class="popup__content">
       <p class="popup__title"><b>Выбранный предмет:</b> {{ subjectName }}</p> 
-      
+      <button class="close-btn btn" @click="$emit('close')"> 
+        <svg class="close-btn__icon" width="20" height="20" viewBox="0 0 24 24">
+        <path d="M11.9998 13.4L7.0998 18.3C6.91647 18.4834 6.68314 18.575 6.3998 18.575C6.11647 18.575 5.88314 18.4834 5.6998 18.3C5.51647 18.1167 5.4248 17.8834 5.4248 17.6C5.4248 17.3167 5.51647 17.0834 5.6998 16.9L10.5998 12L5.6998 7.10005C5.51647 6.91672 5.4248 6.68338 5.4248 6.40005C5.4248 6.11672 5.51647 5.88338 5.6998 5.70005C5.88314 5.51672 6.11647 5.42505 6.3998 5.42505C6.68314 5.42505 6.91647 5.51672 7.0998 5.70005L11.9998 10.6L16.8998 5.70005C17.0831 5.51672 17.3165 5.42505 17.5998 5.42505C17.8831 5.42505 18.1165 5.51672 18.2998 5.70005C18.4831 5.88338 18.5748 6.11672 18.5748 6.40005C18.5748 6.68338 18.4831 6.91672 18.2998 7.10005L13.3998 12L18.2998 16.9C18.4831 17.0834 18.5748 17.3167 18.5748 17.6C18.5748 17.8834 18.4831 18.1167 18.2998 18.3C18.1165 18.4834 17.8831 18.575 17.5998 18.575C17.3165 18.575 17.0831 18.4834 16.8998 18.3L11.9998 13.4Z" fill="black"/>
+        </svg>
+      </button>
       <div class="popup__listing" v-show="isExpanded">
         <ol>
           <li v-for="(question, index) in questions" :key="index" class="popup__question">
@@ -10,11 +14,18 @@
           </li>
         </ol>
       </div>
+      
       <div class="popup__buttons">
+        
+        <button class="share-btn btn">Поделиться
+          <svg class="share-btn__icon" width="15" height="12" viewBox="0 0 18 15">
+            <path d="M18 7L11 0V4C4 5 1 10 0 15C2.5 11.5 6 9.9 11 9.9V14L18 7Z" fill="black"/>
+          </svg>
+        </button>
         <button @click="toggleQuestions" class="toggle-btn btn">
-        {{ isExpanded ? 'Скрыть вопросы' : 'Показать вопросы' }}
-      </button>
-      <button class="close-btn btn" @click="$emit('close')">Закрыть</button>
+          {{ isExpanded ? 'Скрыть вопросы' : 'Показать вопросы' }}
+        </button>
+        <button class="test-btn btn">Создать тест</button>
       </div>
     </div>
   </div>
@@ -27,12 +38,12 @@ export default {
   },
   data() {
     return {
-      isExpanded: false, // Состояние списка вопросов
+      isExpanded: false,
     };
   },
   methods: {
     toggleQuestions() {
-      this.isExpanded = !this.isExpanded; // Переключаем состояние
+      this.isExpanded = !this.isExpanded; 
     },
     close() {
       this.$emit('close');
@@ -54,6 +65,7 @@ export default {
   justify-content: center;
   align-items: center;
 &__content {
+  position: relative; /* Позволяет правильно спозиционировать close-btn */
   background: white;
   padding: 30px;
   border-radius: 5px;
@@ -74,7 +86,8 @@ export default {
     margin-bottom: 5px;
   }
   &__buttons{
-    text-align: right;
+    display: flex;
+    gap:45px;
   }
 
 .btn {
@@ -87,15 +100,39 @@ export default {
   border-radius: 20px;
   border: none;
   cursor: pointer;
-  transition: all 0.5s ease ;
+  transition: all 0.1s ease-in ;
     &:hover{
       background-color: @black;
       color: @white;
+      fill: white;
     }
     
 }
-.toggle-btn{
-      margin-right: 20px;
-    }
+.close-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  top: -15px;
+  right: -15px;
+  background: @yellow;
+  border-radius:20px;
+  border: none;
+  cursor: pointer;
+  &:hover path,
+  &:focus path{
+    fill: white;
+  }
+}  
+.share-btn{
+  cursor: pointer;
+  &:hover path,
+  &:focus path{
+    fill: white;
+  }
+}
 }
 </style>
