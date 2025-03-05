@@ -78,6 +78,7 @@ export default {
 &__listing {
     text-align: left;
     margin-top: 10px;
+    margin-bottom: 35px;
   }
 
   &__question {
