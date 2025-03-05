@@ -3,7 +3,7 @@
       <div class="upload-popup__content">
         <p class="upload-popup__title">Добавить вопросы</p>
         <label for="subjectName" class="upload"> Введите название блока вопросов:
-            <input type="text" class="upload__input">
+            <input type="text" class="upload__input" placeholder="Программирование">
             <div class="upload__image">
                 <img class="upload__image1 image" src="@/assets/upload.png" alt="Загрузить файлы" />
                 <img class="upload__image2 image" src="@/assets/upload2.png" alt="Загрузить файлы" />
@@ -64,7 +64,9 @@
     flex-direction: column;
     font-family: @font2;
     text-align: left;
-
+    ::placeholder{
+        font-family: @font3;
+    }
     &__input {
         width: 75%;
         padding-top: 5px;
@@ -75,8 +77,8 @@
 
     &__image {
         display: flex;
-        justify-content: flex-start; /* Прижимает изображение влево */
-        align-items: center; /* Выравнивает по центру вертикально */
+        justify-content: flex-start; 
+        align-items: center; 
         margin-top: 10px;
         cursor: pointer;
     }
@@ -92,7 +94,6 @@
     }
     &__btn-alt{
         margin-top: 30px;
-        //margin-left: 50px;
         background-color: @white;
         border:2px solid black;
     }

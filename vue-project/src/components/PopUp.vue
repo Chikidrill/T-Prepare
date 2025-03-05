@@ -32,6 +32,7 @@
     <ReferralPopup v-if="isSharePopupVisible" @close="isSharePopupVisible = false" />
   </div>
 </template>
+
 <script>
 import ReferralPopup from './ReferalPopUp.vue';
 
@@ -74,7 +75,7 @@ export default {
   justify-content: center;
   align-items: center;
 &__content {
-  position: relative; /* Позволяет правильно спозиционировать close-btn */
+  position: relative; 
   background: white;
   padding: 30px;
   border-radius: 5px;
