@@ -5,8 +5,8 @@
         <label for="subjectName" class="upload"> Введите название блока вопросов:
             <input type="text" class="upload__input">
             <div class="upload__image">
-                <img src="@/assets/upload.png" alt="Загрузить файлы" />
-                <img src="@/assets/upload2.png" alt="Загрузить файлы" />
+                <img class="upload__image1 image" src="@/assets/upload.png" alt="Загрузить файлы" />
+                <img class="upload__image2 image" src="@/assets/upload2.png" alt="Загрузить файлы" />
             </div>
         </label>
         <button class="close-btn btn" @click="$emit('close')"> 
@@ -48,14 +48,14 @@
     }
     &__buttons{
         display: flex;
-        justify-content: center;
-        gap: 50px;
-
+        flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  align-content: space-between;
     }
  &__content {
     position: relative; 
-    max-width: 700px;
-    width: 100%;
     background: white;
     padding: 20px;
     border-radius: 5px;
@@ -81,13 +81,17 @@
         justify-content: flex-start; /* Прижимает изображение влево */
         align-items: center; /* Выравнивает по центру вертикально */
         margin-top: 10px;
-        gap: 50px;
+        
+    }
+    &__image1{
+        padding-right: 50px;
     }
     &__btn{
         margin-top: 30px;
         padding-left: 20px;
         padding-right: 20px;
         padding: 12px 17px;
+        margin-right: 50px;
     }
     &__btn-alt{
         margin-top: 30px;
