@@ -25,13 +25,14 @@
         <button @click="toggleQuestions" class="toggle-btn btn">
           {{ isExpanded ? 'Скрыть вопросы' : 'Показать вопросы' }}
         </button>
-        <button class="test-btn btn">Создать тест</button>
+        <button class="test-btn btn"  @click="goToExam">Создать тест</button>
       </div>
       
     </div>
     <ReferralPopup v-if="isSharePopupVisible" @close="isSharePopupVisible = false" />
   </div>
 </template>
+
 <script>
 import ReferralPopup from './ReferalPopUp.vue';
 
@@ -56,7 +57,10 @@ export default {
     },
     close() {
       this.$emit('close');
-    }
+    },
+    goToExam() {
+      this.$router.push({ path: '/exam', query: { subject: this.subjectName } });
+  }
   }
 };
 </script>
@@ -74,7 +78,7 @@ export default {
   justify-content: center;
   align-items: center;
 &__content {
-  position: relative; /* Позволяет правильно спозиционировать close-btn */
+  position: relative; 
   background: white;
   padding: 30px;
   border-radius: 5px;

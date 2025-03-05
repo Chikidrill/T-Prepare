@@ -38,11 +38,12 @@
 
       <div class="button-container">
         <button @click="openPopup(subject)" class="pp-btn">Открыть вопросы для блока "{{ subject.name }}"</button>
+        <button @click="deleteSubject(subject.id)" class="delete-btn pp-btn">Удалить</button>
       </div>
 
     </div>
     <Popup v-if="isPopupOpen" :subject-name="selectedSubject?.name" :questions="selectedSubject?.questions" @close="closePopup" />
-    <UploadPopUp v-if="isUploadPopupVisible" @close="isUploadPopupVisible = false" />
+    <UploadPopUp v-if="isUploadPopupVisible" @close="isUploadPopupVisible = false" @addSubject="addNewSubject" />
     <div class ="background-img">
       <img src = @/assets/background2.png/>
     </div>
@@ -50,7 +51,7 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Popup from '@/components/PopUp.vue';
 import QuestionCard from '@/components/QuestionBlock.vue';
 import UploadPopUp from '@/components/UploadPopUp.vue';
@@ -59,26 +60,13 @@ export default {
   components: { QuestionCard, Popup, UploadPopUp },
   data() {
     return {
-      username: 'Сергей', 
       subjects: [
-        {
-          id: 1,
-          name: 'Программирование',
-          creationDate: '04.03.2025',
-          questionCount:'23',
-          questions: ['Что такое переменная?', 'Как работает if?', 'Разница между let и const?', 'Какой язык программирования самый...']
-        },
-        {
-          id: 2,
-          name: 'Математика',
-          creationDate: '04.03.2025',
-          questionCount:'23',
-          questions: ['Что такое производная?', 'Как решать квадратные уравнения?', 'Определение синуса и косинуса?', 'Как вычислить интеграл от ...']
-        }
+        { id: 1, name: 'Программирование', creationDate: new Date().toLocaleDateString(), questionCount: '0', questions: [] },
+        { id: 2, name: 'Математика', creationDate: new Date().toLocaleDateString(), questionCount: '0', questions: [] }
       ],
-      isUploadPopupVisible: false,
+      isPopupOpen: false,
       selectedSubject: null,
-      isPopupOpen: false
+      isUploadPopupVisible: false
     };
   },
   methods: {
@@ -88,15 +76,45 @@ export default {
     },
     closePopup() {
       this.isPopupOpen = false;
+    },
+    addNewSubject(subjectName) {
+      const newSubject = {
+        id: this.subjects.length + 1, // Увеличиваем id
+        name: subjectName,
+        creationDate: new Date().toLocaleDateString(),
+        questionCount: '0',
+        questions: [] // Пустой массив вопросов
+      };
+      this.subjects.push(newSubject);
+      this.saveSubjectsToLocalStorage(); // Сохраняем в LocalStorage после добавления
+    },
+    deleteSubject(subjectId) {
+      this.subjects = this.subjects.filter(subject => subject.id !== subjectId);
+      this.saveSubjectsToLocalStorage(); // Сохраняем после удаления
+    },
+    saveSubjectsToLocalStorage() {
+      localStorage.setItem('subjects', JSON.stringify(this.subjects)); // Сохраняем массив блоков в LocalStorage
+    },
+    loadSubjectsFromLocalStorage() {
+      const savedSubjects = localStorage.getItem('subjects');
+      if (savedSubjects) {
+        this.subjects = JSON.parse(savedSubjects); // Загружаем сохраненные блоки при монтировании компонента
+      }
     }
+  },
+  mounted() {
+    this.loadSubjectsFromLocalStorage(); // Загружаем данные при монтировании компонента
   }
 };
 </script>
+
+
 
 <style lang="less">
 .button-container {
   display: flex;
   justify-content: flex-end; /* Выравнивание кнопки вправо */
+  gap: 50px;
 }
 .pp-btn {
   padding: 10px 15px;

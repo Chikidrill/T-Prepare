@@ -1,7 +1,11 @@
 <template>
   <div class="app">
     <PageHeader />
-    <RouterView />
+    <RouterView v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </RouterView>
     <PageFooter />
   </div>
 </template>
@@ -19,4 +23,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+/* Плавный переход без резкого обрыва */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.6s; /* Дольше, мягче */
+}
+
+/* Начальное состояние при входе */
+.fade-enter {
+  opacity: 0;
+}
+
+/* Состояние при выходе */
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
