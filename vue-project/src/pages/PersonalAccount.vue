@@ -42,7 +42,9 @@
 
     </div>
     <Popup v-if="isPopupOpen" :subject-name="selectedSubject?.name" :questions="selectedSubject?.questions" @close="closePopup" />
-
+    <div class ="background-img">
+      <img src = @/assets/background2.png/>
+    </div>
   </main>
 </template>
 
@@ -190,5 +192,18 @@ export default {
     margin-bottom: 10px;
   }
 
+}
+
+.background-img{
+  position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100vw; 
+    height: auto; 
+    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1; 
 }
 </style>
