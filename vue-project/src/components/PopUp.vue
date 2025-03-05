@@ -41,12 +41,22 @@ export default {
   },
   props: {
     subjectName: String,
+    questions: Array
   },
   data() {
     return {
+      isExpanded: false,
       isPopupVisible: true,
       isSharePopupVisible: false,
     };
+  },
+  methods: {
+    toggleQuestions() {
+      this.isExpanded = !this.isExpanded; 
+    },
+    close() {
+      this.$emit('close');
+    }
   }
 };
 </script>
