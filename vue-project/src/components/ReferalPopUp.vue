@@ -1,7 +1,7 @@
 <template>
-  <div class="popup">
-    <div class="popup__content">
-      <p class="popup__title">Поделитесь ссылкой</p>
+  <div class="referal-popup">
+    <div class="referal-popup__content">
+      <p class="referal-popup__title">Поделитесь ссылкой</p>
       <input type="text" class="share-input" :value="referralLink" readonly>
       <button class="close-btn btn" @click="$emit('close')"> 
         <svg class="close-btn__icon" width="20" height="20" viewBox="0 0 24 24">
@@ -23,7 +23,7 @@ export default {
 </script>
 
 <style>
-.popup {
+.referal-popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -34,14 +34,15 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.popup__content {
+.referal-popup__content {
+  position: relative;
   background: white;
   padding: 20px;
   border-radius: 5px;
   text-align: center;
 }
 .share-input {
-  width: 100%;
+  width: 70%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
