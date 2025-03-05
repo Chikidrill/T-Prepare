@@ -35,6 +35,7 @@ export default {
   align-items: center;
 }
 .referal-popup__content {
+  position: relative;
   background: white;
   padding: 20px;
   border-radius: 5px;
