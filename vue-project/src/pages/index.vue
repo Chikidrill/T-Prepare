@@ -7,7 +7,7 @@
     <div class="page-home__container">
       <div class="page-home__about">
         <p class="page-home__text1">
-          Освой любой экзамен
+          Освой любой экзамен <br>
           вместе с T-Prepare 
         </p>
         <p class="page-home__text2">
@@ -89,16 +89,17 @@ export default {
 
   &__text1 {
     font-family: @font1;
-    font-size: 100px;
+    font-size: 80px;
     font-weight: 700;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
   }
 
   &__text2 {
     font-family: @font3;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 400;
     margin-top: 0; // Убираем лишний отступ, если он есть
+    margin-bottom: 35px;
   }
   &__startbtn{
     font-family: @font3;
@@ -106,7 +107,7 @@ export default {
     font-weight: 400;
     background-color: @yellow;
     border-radius: 25px;
-    padding: 29px 65px;
+    padding: 20px 45px;
     transition: all 0.5s ease ;
     &:hover{
       background-color: @black;
@@ -126,7 +127,7 @@ export default {
   }
   &__problem-text{
     font-family: @font3;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 400;
     margin-top: 0;
     text-align: right; /* Выравниваем текст справа */
@@ -146,7 +147,7 @@ export default {
   }
   &__solve-text{
     font-family: @font3;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 400;
     margin-top: 0;
     text-align: left; /* Выравниваем текст справа */
