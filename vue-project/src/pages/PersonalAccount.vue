@@ -19,7 +19,7 @@
       </div>
     </div>
     
-    <!-- Блок с вопросами -->
+
     <div class="profile__question-block" v-for="subject in subjects" :key="subject.id">
       <QuestionCard
         :subject-id="subject.id"
@@ -29,11 +29,11 @@
       />
 
       <div class="button-container">
-        <button @click="openPopup(subject.name)" class="pp-btn">Открыть вопросы для блока "{{ subject.name }}"</button>
+        <button @click="openPopup(subject)" class="pp-btn">Открыть вопросы для блока "{{ subject.name }}"</button>
       </div>
 
     </div>
-    <Popup v-if="isPopupOpen" :subject-name="selectedSubject" @close="closePopup" />
+    <Popup v-if="isPopupOpen" :subject-name="selectedSubject?.name" :questions="selectedSubject?.questions" @close="closePopup" />
 
   </main>
 </template>
@@ -44,10 +44,7 @@ import Popup from '@/components/PopUp.vue';
 import QuestionCard from '@/components/QuestionBlock.vue';
 
 export default {
-  components: {
-    QuestionCard,
-    Popup,
-  },
+  components: { QuestionCard, Popup },
   data() {
     return {
       username: 'Сергей', 
@@ -55,31 +52,29 @@ export default {
         {
           id: 1,
           name: 'Программирование',
-          questionCount: 23,
-          creationDate: '04.03.2025'
+          creationDate: '04.03.2025',
+          questions: ['Что такое переменная?', 'Как работает if?', 'Разница между let и const?']
         },
         {
           id: 2,
           name: 'Математика',
-          questionCount: 23,
-          creationDate: '04.03.2025'
+          creationDate: '04.03.2025',
+          questions: ['Что такое производная?', 'Как решать квадратные уравнения?', 'Определение синуса и косинуса?']
         }
       ],
+      selectedSubject: null,
+      isPopupOpen: false
     };
   },
-  setup() {
-    const isPopupOpen = ref(false);
-    return { isPopupOpen };
-  },
   methods: {
-  openPopup(subjectName) {
-    this.selectedSubject = subjectName; // Сохраняем название предмета
-    this.isPopupOpen = true; // Открываем попап
-  },
-  closePopup() {
-    this.isPopupOpen = false; // Закрываем попап
+    openPopup(subject) {
+      this.selectedSubject = subject;
+      this.isPopupOpen = true;
+    },
+    closePopup() {
+      this.isPopupOpen = false;
+    }
   }
-}
 };
 </script>
 
@@ -107,6 +102,7 @@ export default {
 
 .profile {
   margin-top: 50px;
+  margin-bottom: 50px;
   padding-left: 160px;
   padding-right: 160px;
   
