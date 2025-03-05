@@ -25,7 +25,7 @@
         <button @click="toggleQuestions" class="toggle-btn btn">
           {{ isExpanded ? 'Скрыть вопросы' : 'Показать вопросы' }}
         </button>
-        <button class="test-btn btn">Создать тест</button>
+        <button class="test-btn btn"  @click="goToExam">Создать тест</button>
       </div>
       
     </div>
@@ -57,7 +57,10 @@ export default {
     },
     close() {
       this.$emit('close');
-    }
+    },
+    goToExam() {
+      this.$router.push({ path: '/exam', query: { subject: this.subjectName } });
+  }
   }
 };
 </script>
