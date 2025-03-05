@@ -84,7 +84,7 @@ export default {
     align-items: center;
     justify-content: center; // Центрирование по вертикали
     text-align: center;
-    margin-bottom: 150px;
+    margin-bottom: 100px;
   }
 
   &__text1 {
@@ -119,7 +119,7 @@ export default {
     align-items: center; /* Выравниваем по центру вертикали */
     justify-content: center; /* Центрируем по горизонтали */
     gap: 300px; /* Отступ между картинкой и текстом */
-    padding-bottom: 100px;
+    padding-bottom: 70px;
   }
   &__problem-image{
     width: 350px;
