@@ -9,8 +9,8 @@
       </button>
       <div class="popup__listing" v-show="isExpanded">
         <ol>
-          <li v-for="(question, index) in questions" :key="index" class="popup__question">
-            {{ question }}
+          <li v-for="(question, index) in questions" :key="index">
+            {{ question.question }}
           </li>
         </ol>
       </div>
@@ -49,7 +49,13 @@ export default {
       isExpanded: false,
       isPopupVisible: true,
       isSharePopupVisible: false,
+      visibleCount: 10, // Сколько вопросов показывать
     };
+  },
+  computed: {
+    visibleQuestions() {
+      return this.questions.slice(0, this.visibleCount);
+    }
   },
   methods: {
     toggleQuestions() {
@@ -59,7 +65,7 @@ export default {
       this.$emit('close');
     },
     goToExam() {
-      this.$router.push({ path: '/exam', query: { subject: this.subjectName } });
+    this.$router.push({ path: '/exam', query: { subject: this.subjectName } });
   }
   }
 };
@@ -77,52 +83,46 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-&__content {
+}
+.popup__content {
   position: relative; 
   background: white;
   padding: 30px;
   border-radius: 5px;
   text-align: center;
 }
-&__title{
+.popup__title {
   font-family: @font3;
   font-size: 25px;
 }
-&__listing {
-    text-align: left;
-    margin-top: 10px;
-    margin-bottom: 35px;
-  }
+.popup__listing {
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  font-family: @font3;
+  max-height: 200px; /* Ограничиваем максимальную высоту */
+  overflow-y: auto; /* Добавляем вертикальную прокрутку */
+  padding-right: 10px; /* Отступ для вертикального скроллбара */
+}
 
-  &__question {
-    font-family: @font3;
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  &__buttons{
-    display: flex;
-    gap:45px;
-  }
+.popup__buttons {
+  display: flex;
+  gap: 45px;
+}
+
 
 .btn {
   padding: 10px 15px;
-  
   background: @yellow;
   font-family: @font3;
   text-align: right;
-  color:@black;
+  color: @black;
   border-radius: 20px;
   border: none;
   cursor: pointer;
   transition: all 0.1s ease-in ;
-    &:hover{
-      background-color: @black;
-      color: @white;
-      fill: white;
-    }
-    
 }
-.close-btn{
+.close-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,20 +133,17 @@ export default {
   top: -15px;
   right: -15px;
   background: @yellow;
-  border-radius:20px;
+  border-radius: 20px;
   border: none;
   cursor: pointer;
-  &:hover path,
-  &:focus path{
+  &:hover path, &:focus path {
     fill: white;
   }
 }  
-.share-btn{
+.share-btn {
   cursor: pointer;
-  &:hover path,
-  &:focus path{
+  &:hover path, &:focus path {
     fill: white;
   }
-}
 }
 </style>

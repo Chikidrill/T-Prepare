@@ -5,7 +5,8 @@
         <label for="subjectName" class="upload"> Введите название блока вопросов:
             <input v-model="subjectName" type="text" class="upload__input" placeholder="Программирование">
             <div class="upload__image">
-                <img class="upload__image1 image" src="@/assets/upload.png" alt="Загрузить файлы" />
+                <input type="file" @change="handleFileUpload" id="fileInput" style="display:none" />
+                <img class="upload__image1 image" src="@/assets/upload.png" alt="Загрузить файлы" @click="triggerFileInput" />
                 <img class="upload__image2 image" src="@/assets/upload2.png" alt="Загрузить файлы" />
             </div>
         </label>
@@ -26,21 +27,43 @@
   <script>
   export default {
     data() {
-      return{
+      return {
         subjectName: '',
+        jsonData: null,  // Хранить загруженные данные
       };
     },
     methods: {
-    addSubject() {
-      if (this.subjectName) {
-        this.$emit('add-subject', this.subjectName);  // Отправляем название блока вверх в родительский компонент
-        this.subjectName = '';  // Очистим поле ввода
-        this.$emit('close'); // Закрываем попап
-      } else {
-        alert('Введите название блока!');
-      }
-    }
-  }
+      triggerFileInput() {
+        document.getElementById('fileInput').click();
+      },
+      handleFileUpload(event) {
+        const file = event.target.files[0];
+        if (file && file.type === "application/json") {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+            try {
+                this.jsonData = JSON.parse(e.target.result); // Сохраняем данные
+            } catch (err) {
+                alert("Ошибка при загрузке файла. Убедитесь, что файл в формате JSON.");
+            }
+            };
+            reader.readAsText(file);
+        } else {
+            alert('Пожалуйста, загрузите файл в формате JSON.');
+        }
+        },
+
+      addSubject() {
+        if (this.subjectName && this.jsonData) {
+          this.$emit('add-subject', this.subjectName, this.jsonData);
+          this.subjectName = '';  // Очистим поле ввода
+          this.jsonData = null;
+          this.$emit('close');  // Закрываем попап
+        } else {
+          alert('Введите название блока и загрузите файл!');
+        }
+      },
+    },
   };
   </script>
   

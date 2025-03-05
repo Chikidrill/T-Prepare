@@ -70,41 +70,41 @@ export default {
     };
   },
   methods: {
-    openPopup(subject) {
-      this.selectedSubject = subject;
-      this.isPopupOpen = true;
-    },
-    closePopup() {
-      this.isPopupOpen = false;
-    },
-    addNewSubject(subjectName) {
-      const newSubject = {
-        id: this.subjects.length + 1, // Увеличиваем id
-        name: subjectName,
-        creationDate: new Date().toLocaleDateString(),
-        questionCount: '0',
-        questions: [] // Пустой массив вопросов
-      };
-      this.subjects.push(newSubject);
-      this.saveSubjectsToLocalStorage(); // Сохраняем в LocalStorage после добавления
-    },
-    deleteSubject(subjectId) {
-      this.subjects = this.subjects.filter(subject => subject.id !== subjectId);
-      this.saveSubjectsToLocalStorage(); // Сохраняем после удаления
-    },
-    saveSubjectsToLocalStorage() {
-      localStorage.setItem('subjects', JSON.stringify(this.subjects)); // Сохраняем массив блоков в LocalStorage
-    },
-    loadSubjectsFromLocalStorage() {
-      const savedSubjects = localStorage.getItem('subjects');
-      if (savedSubjects) {
-        this.subjects = JSON.parse(savedSubjects); // Загружаем сохраненные блоки при монтировании компонента
-      }
-    }
+  openPopup(subject) {
+    this.selectedSubject = subject;
+    this.isPopupOpen = true;
   },
-  mounted() {
-    this.loadSubjectsFromLocalStorage(); // Загружаем данные при монтировании компонента
+  closePopup() {
+    this.isPopupOpen = false;
+  },
+  addNewSubject(subjectName, jsonData) {
+    const newSubject = {
+      id: this.subjects.length + 1,
+      name: subjectName,
+      creationDate: new Date().toLocaleDateString(),
+      questionCount: jsonData.length,  // Количество вопросов из JSON
+      questions: jsonData,  // Сохраняем вопросы
+    };
+    this.subjects.push(newSubject);
+    this.saveSubjectsToLocalStorage();
+  },
+  deleteSubject(subjectId) {
+    this.subjects = this.subjects.filter(subject => subject.id !== subjectId);
+    this.saveSubjectsToLocalStorage();
+  },
+  saveSubjectsToLocalStorage() {
+    localStorage.setItem('subjects', JSON.stringify(this.subjects));
+  },
+  loadSubjectsFromLocalStorage() {
+    const savedSubjects = localStorage.getItem('subjects');
+    if (savedSubjects) {
+      this.subjects = JSON.parse(savedSubjects);
+    }
   }
+},
+mounted() {
+  this.loadSubjectsFromLocalStorage();
+}
 };
 </script>
 
