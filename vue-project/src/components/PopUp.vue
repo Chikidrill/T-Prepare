@@ -17,7 +17,7 @@
       
       <div class="popup__buttons">
         
-        <button class="share-btn btn">Поделиться
+        <button class="share-btn btn" @click="isSharePopupVisible = true">Поделиться
           <svg class="share-btn__icon" width="15" height="12" viewBox="0 0 18 15">
             <path d="M18 7L11 0V4C4 5 1 10 0 15C2.5 11.5 6 9.9 11 9.9V14L18 7Z" fill="black"/>
           </svg>
@@ -27,27 +27,26 @@
         </button>
         <button class="test-btn btn">Создать тест</button>
       </div>
+      
     </div>
+    <ReferralPopup v-if="isSharePopupVisible" @close="isSharePopupVisible = false" />
   </div>
 </template>
 <script>
+import ReferralPopup from './ReferalPopUp.vue';
+
 export default {
+  components: {
+    ReferralPopup,
+  },
   props: {
-    subjectName: String, 
-    questions: Array
+    subjectName: String,
   },
   data() {
     return {
-      isExpanded: false,
+      isPopupVisible: true,
+      isSharePopupVisible: false,
     };
-  },
-  methods: {
-    toggleQuestions() {
-      this.isExpanded = !this.isExpanded; 
-    },
-    close() {
-      this.$emit('close');
-    }
   }
 };
 </script>
