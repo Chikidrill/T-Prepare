@@ -39,25 +39,24 @@
       handleFileUpload(event) {
         const file = event.target.files[0];
         if (file && file.type === "application/json") {
-            const reader = new FileReader();
-            reader.onload = (e) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
             try {
-                this.jsonData = JSON.parse(e.target.result); // Сохраняем данные
+              this.jsonData = JSON.parse(e.target.result);
+              this.$emit('add-subject', this.subjectName, this.jsonData);  // Отправляем название и данные вверх
             } catch (err) {
-                alert("Ошибка при загрузке файла. Убедитесь, что файл в формате JSON.");
+              alert("Ошибка при загрузке файла. Убедитесь, что файл в формате JSON.");
             }
-            };
-            reader.readAsText(file);
+          };
+          reader.readAsText(file);
         } else {
-            alert('Пожалуйста, загрузите файл в формате JSON.');
+          alert('Пожалуйста, загрузите файл в формате JSON.');
         }
-        },
-
+      },
       addSubject() {
         if (this.subjectName && this.jsonData) {
           this.$emit('add-subject', this.subjectName, this.jsonData);
           this.subjectName = '';  // Очистим поле ввода
-          this.jsonData = null;
           this.$emit('close');  // Закрываем попап
         } else {
           alert('Введите название блока и загрузите файл!');

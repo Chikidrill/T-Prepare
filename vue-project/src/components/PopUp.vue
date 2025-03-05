@@ -25,7 +25,7 @@
         <button @click="toggleQuestions" class="toggle-btn btn">
           {{ isExpanded ? 'Скрыть вопросы' : 'Показать вопросы' }}
         </button>
-        <button class="test-btn btn"  @click="goToExam">Создать тест</button>
+        <button class="test-btn btn"  @click="goToExam" :subject-name="selectedSubject?.name" :questions="selectedSubject?.questions">Создать тест</button>
       </div>
       
     </div>
@@ -65,9 +65,18 @@ export default {
       this.$emit('close');
     },
     goToExam() {
-    this.$router.push({ path: '/exam', query: { subject: this.subjectName } });
+    // Сериализуем вопросы в строку перед передачей
+    const questionsString = JSON.stringify(this.questions);
+    this.$router.push({ 
+      path: '/exam', 
+      query: { 
+        subject: this.subjectName, 
+        questions: questionsString 
+      }
+    });
+
   }
-  }
+}
 };
 </script>
 
