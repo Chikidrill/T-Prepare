@@ -80,10 +80,13 @@
         justify-content: flex-start; 
         align-items: center; 
         margin-top: 10px;
-        cursor: pointer;
+        gap: 50px;
     }
     &__image1{
-        padding-right: 50px;
+        cursor: pointer;
+    }
+    &__image2{
+        cursor: pointer;
     }
     &__btn{
         margin-top: 30px;
