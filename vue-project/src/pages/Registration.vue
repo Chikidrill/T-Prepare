@@ -53,23 +53,34 @@
         password: "",
       };
     },
-    methods: {
-      async handleRegistration() {
-        // Логика для регистрации
-        const response = await axios.post('http://127.0.0.1:8000/auth/register/',{
-            username: this.username,
-            email: this.email,
-            password: this.password
-        });
-        console.log("Регистрация с данными:", userData);
+      methods: {
+  async handleRegistration() {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/auth/register/', {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      });
+
+      console.log("Регистрация прошла успешно:", response.data);
 
 
-        this.username = "";
-        this.email = "";
-        this.password = "";
-      },
-    },
-  };
+      this.username = "";
+      this.email = "";
+      this.password = "";
+
+      this.$router.push({ name: 'home' }); 
+    } catch (error) {
+      if (error.response) {
+        console.error("Ошибка регистрации:", error.response.data);
+        alert("Ошибка регистрации: " + error.response.data.message);
+      } else {
+        console.error("Сетевая ошибка:", error.message);
+        alert("Произошла ошибка при регистрации. Попробуйте снова.");
+      }
+    }
+  },
+      }}
   </script>
   
   <style lang="less">
