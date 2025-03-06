@@ -32,7 +32,6 @@
       <QuestionCard
         :subject-id="subject.id"
         :subject-name="subject.name"
-        :question-count="subject.questionCount"
         :creation-date="subject.creationDate"
       />
 
@@ -42,7 +41,8 @@
       </div>
 
     </div>
-    <Popup v-if="isPopupOpen" :subject-name="selectedSubject?.name" :questions="selectedSubject?.questions" @close="closePopup" />
+    <Popup v-if="isPopupOpen" :subject-name="selectedSubject?.name" :questions="selectedSubject?.questions.questions" @close="closePopup" />
+
     <UploadPopUp v-if="isUploadPopupVisible" @close="isUploadPopupVisible = false" @addSubject="addNewSubject" />
     <div class ="background-img">
       <img src = @/assets/background2.png/>
@@ -62,8 +62,8 @@ export default {
     return {
       username: "user",
       subjects: [
-        { id: 1, name: 'Программирование', creationDate: new Date().toLocaleDateString(), questionCount: '0', questions: [] },
-        { id: 2, name: 'Математика', creationDate: new Date().toLocaleDateString(), questionCount: '0', questions: [] }
+        { id: 1, name: 'Программирование', creationDate: new Date().toLocaleDateString(), questions: [] },
+        { id: 2, name: 'Математика', creationDate: new Date().toLocaleDateString(), questions: [] }
       ],
       isPopupOpen: false,
       selectedSubject: null,

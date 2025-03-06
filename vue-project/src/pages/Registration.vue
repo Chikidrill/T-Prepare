@@ -7,8 +7,8 @@
           <input
             class = "reg__form-input"
             type="text"
-            id="name"
-            v-model="name"
+            id="username"
+            v-model="username"
             placeholder="Введите ваше имя"
             required
           />
@@ -44,42 +44,43 @@
   </template>
   
   <script>
+  import axios from 'axios';
   export default {
     data() {
       return {
-        name: "",
+        username: "",
         email: "",
         password: "",
       };
     },
-    methods: {
-      handleRegistration() {
-        // Логика для регистрации
-        const userData = {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-        };
-        console.log("Регистрация с данными:", userData);
-  
-        // Здесь можно добавить вызов API для регистрации
-        // Например:
-        // axios.post('/api/register', userData)
-        //   .then(response => {
-        //     console.log('Успешная регистрация:', response.data);
-        //     this.$router.push('/login'); // Перенаправление на страницу входа
-        //   })
-        //   .catch(error => {
-        //     console.error('Ошибка регистрации:', error);
-        //   });
-  
-        // Очистка полей после регистрации
-        this.name = "";
-        this.email = "";
-        this.password = "";
-      },
-    },
-  };
+      methods: {
+  async handleRegistration() {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/auth/register/', {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      });
+
+      console.log("Регистрация прошла успешно:", response.data);
+
+
+      this.username = "";
+      this.email = "";
+      this.password = "";
+
+      this.$router.push({ name: 'home' }); 
+    } catch (error) {
+      if (error.response) {
+        console.error("Ошибка регистрации:", error.response.data);
+        alert("Ошибка регистрации: " + error.response.data.message);
+      } else {
+        console.error("Сетевая ошибка:", error.message);
+        alert("Произошла ошибка при регистрации. Попробуйте снова.");
+      }
+    }
+  },
+      }}
   </script>
   
   <style lang="less">
