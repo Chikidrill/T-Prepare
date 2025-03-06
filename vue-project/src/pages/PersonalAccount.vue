@@ -60,6 +60,7 @@ export default {
   components: { QuestionCard, Popup, UploadPopUp },
   data() {
     return {
+      username: "user",
       subjects: [
         { id: 1, name: 'Программирование', creationDate: new Date().toLocaleDateString(), questionCount: '0', questions: [] },
         { id: 2, name: 'Математика', creationDate: new Date().toLocaleDateString(), questionCount: '0', questions: [] }
