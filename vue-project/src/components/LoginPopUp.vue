@@ -48,13 +48,17 @@
   </template>
   
   <script>
+  import axios from 'axios';
   export default {
     data() {
       return {
         email: "",
         password: "",
         showEmailError: false, 
-      };
+        showHint: false, // Для отображения подсказки о валидации email
+        showEmailError: false, // Для отображения ошибки email
+        timeoutId: null, // Для задержки валидации
+    };
     },
     methods: {
       onInput() {
@@ -68,15 +72,43 @@
     onBlur() {
       this.showHint = !this.email.includes('@');
     },
-      handleLogin() {
-        
-        if (!this.email.includes('@')) {
-          this.showEmailError = true; 
-          return;
-        }
-        console.log("Вход с email:", this.email);
-        this.closePopup();
+    async handleLogin() {
+  // Проверка email
+  if (!this.email.includes('@')) {
+    this.showEmailError = true;
+    return;
+  }
+
+  try {
+    // Создаем объект FormData
+    const formData = new FormData();
+    formData.append('username', this.email); // Добавляем email как username
+    formData.append('password', this.password); // Добавляем пароль
+
+    // Отправляем запрос с form-data
+    const response = await axios.post('http://127.0.0.1:8000/auth/login/', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data', // Указываем тип контента
       },
+    });
+
+    // Обработка успешного ответа
+    if (!response.data.success) {
+      console.log("Успешный вход:", response.data);
+      this.closePopup(); // Закрываем попап (если он есть)
+      localStorage.setItem('token', response.data.token); // Сохраняем токен
+
+      // Перенаправляем в личный кабинет
+      this.$router.push({ name: 'personalaccount' }); // Используем имя маршрута 'personalaccount'
+    } else {
+      console.error("Ошибка входа:", response.data.message);
+      alert(response.data.message); // Показываем ошибку пользователю
+    }
+  } catch (error) {
+    console.error("Ошибка при входе:", error);
+    alert("Произошла ошибка при входе. Попробуйте снова."); // Общая ошибка
+  }
+},
       handleRegister() {
         this.closePopup();
         this.$router.push({ name: "registration" });
