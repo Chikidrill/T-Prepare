@@ -39,10 +39,15 @@ import ReferralPopup from './ReferalPopUp.vue';
 export default {
   components: {
     ReferralPopup,
+    selectedSubject: null,
   },
   props: {
     subjectName: String,
-    questions: Array
+    questions: Array,
+    selectedSubject: {
+    type: Object,
+    default: () => null, // Это обеспечит значение по умолчанию
+  },
   },
   data() {
     return {
