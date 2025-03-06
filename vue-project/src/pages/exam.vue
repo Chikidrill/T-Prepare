@@ -63,9 +63,11 @@
     methods: {
   // Составляем все варианты ответа (правильный + неправильные)
   allOptions(question) {
-    const correctAnswer = Array.isArray(question.answers) ? question.answers[0] : question.answers;
-    return [correctAnswer, ...question.wrong_answers]; // Создаем массив с правильным и неправильными ответами
-  },
+  const correctAnswer = question.correct_answer;
+  return [correctAnswer, ...question.wrong_answers]; // Создаем массив с правильным и неправильными ответами
+},
+
+
   checkAnswers() {
     let correctCount = 0; // Обнуляем счетчик перед каждым запуском теста
 
@@ -73,7 +75,7 @@
       // Проверяем, что ответ был выбран
       if (this.answers[index] !== undefined) {
         // Сравниваем выбранный ответ с правильным (первым элементом массива answers)
-        if (this.answers[index] === (Array.isArray(question.answers) ? question.answers[0] : question.answers)) {
+        if (this.answers[index] === question.correct_answer) {
           correctCount++;
         }
       }
