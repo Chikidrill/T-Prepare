@@ -70,7 +70,6 @@ export default {
       this.$emit('close');
     },
     goToExam() {
-    // Сериализуем вопросы в строку перед передачей
     const questionsString = JSON.stringify(this.questions);
     this.$router.push({ 
       path: '/exam', 

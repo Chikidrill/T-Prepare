@@ -32,7 +32,6 @@
       <QuestionCard
         :subject-id="subject.id"
         :subject-name="subject.name"
-        :question-count="subject.questionCount"
         :creation-date="subject.creationDate"
       />
 
@@ -62,8 +61,8 @@ export default {
   data() {
     return {
       subjects: [
-        { id: 1, name: 'Программирование', creationDate: new Date().toLocaleDateString(), questionCount: '0', questions: [] },
-        { id: 2, name: 'Математика', creationDate: new Date().toLocaleDateString(), questionCount: '0', questions: [] }
+        { id: 1, name: 'Программирование', creationDate: new Date().toLocaleDateString(), questions: [] },
+        { id: 2, name: 'Математика', creationDate: new Date().toLocaleDateString(), questions: [] }
       ],
       isPopupOpen: false,
       selectedSubject: null,
