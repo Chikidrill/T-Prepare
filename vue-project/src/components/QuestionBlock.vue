@@ -1,19 +1,23 @@
 <template>
   <div class="question-block">
       <h2 class="subject-name">{{ subjectName }}</h2>
-      <p class="question-count">Количество вопросов: {{ questionCount }}</p>
       <p class="creation-date">Дата создания: {{ creationDate }}</p>
   </div>
 </template>
 <script>
 export default {
   props: {
-      subjectId: Number,
-      subjectName: String,
-      questionCount: Number,
-      creationDate: String
+    ubjectId: Number,
+    subjectName: String,
+    questionCount: Number,
+    creationDate: String
+  },
+  computed: {
+    questionCount() {
+      return this.questions ? this.questions.length : 0;
+    }
   }
-}
+};
 </script>
 <style lang="less">
 .question-block {

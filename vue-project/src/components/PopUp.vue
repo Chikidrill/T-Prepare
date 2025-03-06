@@ -39,10 +39,15 @@ import ReferralPopup from './ReferalPopUp.vue';
 export default {
   components: {
     ReferralPopup,
+    selectedSubject: null,
   },
   props: {
     subjectName: String,
-    questions: Array
+    questions: Array,
+    selectedSubject: {
+    type: Object,
+    default: () => null, // Это обеспечит значение по умолчанию
+  },
   },
   data() {
     return {
@@ -65,7 +70,6 @@ export default {
       this.$emit('close');
     },
     goToExam() {
-    // Сериализуем вопросы в строку перед передачей
     const questionsString = JSON.stringify(this.questions);
     this.$router.push({ 
       path: '/exam', 
