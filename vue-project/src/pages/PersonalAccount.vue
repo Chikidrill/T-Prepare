@@ -44,9 +44,6 @@
     <Popup v-if="isPopupOpen" :subject-name="selectedSubject?.name" :questions="selectedSubject?.questions.questions" @close="closePopup" />
 
     <UploadPopUp v-if="isUploadPopupVisible" @close="isUploadPopupVisible = false" @addSubject="addNewSubject" />
-    <div class ="background-img">
-      <img src = @/assets/background2.png/>
-    </div>
   </main>
 </template>
 
