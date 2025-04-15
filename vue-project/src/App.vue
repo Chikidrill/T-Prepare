@@ -1,15 +1,20 @@
 <template>
-  <div class="app">
-    <PageHeader />
-    <RouterView v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </RouterView>
-    <PageFooter />
+  <div id="app">
+    <div class="layout">
+      <PageHeader />
+
+      <main class="content">
+        <RouterView v-slot="{ Component }">
+          <transition name="fade" mode="out-in">
+            <component :is="Component" />
+          </transition>
+        </RouterView>
+      </main>
+
+      <PageFooter />
+    </div>
   </div>
 </template>
-
 
 <script>
 import PageHeader from "@/components/PageHeader.vue";
@@ -24,17 +29,34 @@ export default {
 </script>
 
 <style>
-/* Плавный переход без резкого обрыва */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.6s; /* Дольше, мягче */
+html, body, #app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* Начальное состояние при входе */
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Контент занимает минимум, но не больше */
+.content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Центровка по вертикали при малом контенте */
+  padding: 40px 0; /* Немного отступа, чтобы не прилипал */
+}
+
+/* Переходы */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.6s;
+}
 .fade-enter {
   opacity: 0;
 }
-
-/* Состояние при выходе */
 .fade-leave-to {
   opacity: 0;
 }

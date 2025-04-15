@@ -12,7 +12,6 @@
           </div>
         </label>
 
-        <!-- Индикатор загрузки -->
         <div v-if="isUploading" class="loader"></div>
 
         <button class="close-btn btn" @click="$emit('close')">
