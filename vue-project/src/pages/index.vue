@@ -1,9 +1,5 @@
 <template>
   <div class="page-home">
-    <div class="page-home__background-image">
-      <img src="@/assets/background1.png" />
-    </div>
-    
     <div class="page-home__container">
       <div class="page-home__about">
         <p class="page-home__text1">

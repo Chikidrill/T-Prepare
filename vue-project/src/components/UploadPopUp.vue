@@ -7,12 +7,17 @@
           <input v-model="subjectName" type="text" class="upload__input" placeholder="Программирование" />
           <div class="upload__image">
             <input type="file" @change="handleFileUpload" id="fileInput" style="display:none" />
-            <img class="upload__image1 image" src="@/assets/upload.png" alt="Загрузить файлы" @click="triggerFileInput" />
-            <img class="upload__image2 image" src="@/assets/upload2.png" alt="Загрузить файлы" />
+            <div class="upload-container upload__image1 image" @click="triggerFileInput">
+                <p class="upload-text">Загрузить файлы</p>
+                <p class="file-formats">В формате .txt, .doc</p>
+            </div>
+            <div class="upload-container upload__image2 image" @click="triggerFileInput">
+                <p class="upload-text">Загрузить фото</p>
+                <p class="file-formats">В формате .jpg</p>
+            </div>
           </div>
         </label>
 
-        <!-- Индикатор загрузки -->
         <div v-if="isUploading" class="loader"></div>
 
         <button class="close-btn btn" @click="$emit('close')">
@@ -135,6 +140,7 @@ async uploadToServer() {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        gap: 60px;
         
     }
  &__content {
@@ -174,16 +180,21 @@ async uploadToServer() {
         cursor: pointer;
     }
     &__btn{
-        margin-top: 30px;
-        padding-left: 20px;
-        padding-right: 20px;
+        margin-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
         padding: 12px 37px;
 
     }
     &__btn-alt{
-        margin-top: 30px;
+        margin-top: 20px;
         background-color: @white;
         border:2px solid black;
+        &:hover {
+          background-color: @black;
+          color: @white;
+          fill:@black;
+  }
     }
 }
 .loader {
@@ -195,10 +206,67 @@ async uploadToServer() {
   margin: 10px auto;
   animation: spin 1s linear infinite;
 }
+.upload-container {
+    width: 200px;
+    height: 100px;
+    border: 2px dashed #999;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+}
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.upload-container:hover {
+    border-color: #0066cc;
+    background-color: #e6f3ff;
+}
+
+.upload-text {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.file-formats {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #666;
+}
+
+.upload-container::before {
+    content: "⬆";
+    font-size: 24px;
+    color: #999;
+    margin-bottom: 10px;
+}
+
+.upload-container:hover::before {
+    color: #0066cc;
+}
+.upload__image2 .upload-text {
+    color: #2c3e50; /* Пример изменения цвета текста */
+}
+
+.upload__image2::before {
+    content: "📷"; /* Иконка камеры вместо стрелки */
+    font-size: 28px;
+}
+
+.upload__image2:hover {
+    border-color: #27ae60; /* Зеленый акцент для фото */
+    background-color: #e8f5e9;
+}
+
+.upload__image2:hover::before {
+    filter: brightness(1.2);
 }
 }
 </style>

@@ -3,11 +3,13 @@
     <div class="page-contacts__container">
       <div class="page-contacts__info">
         <h2 class="page-contacts__title">Контакты</h2>
-
+        <p class="page-contacts__subtitle">
+            Мы всегда готовы вам помочь!
+        </p>
         <p class="page-contacts__text">
           Адрес:
           <span class="page-contacts__text-regular">
-            г. Томск, улица Красноармейская, д.146, ауд. 205
+            г. Томск, улица Вершинина, д.74, ауд. 325
           </span>
         </p>
         <p class="page-contacts__text">
@@ -25,33 +27,56 @@
       </div>
 
       <div class="page-contacts__map">
-        <img src="@/assets/map.png" alt="Карта" />
+        <div id="map" class="map-container"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  mounted() {
+    if (window.ymaps) {
+      window.ymaps.ready(() => {
+        new window.ymaps.Map("map", {
+          center: [56.451061, 84.964196], 
+          zoom: 17,
+          controls: ["zoomControl", "fullscreenControl"],
+        }).geoObjects.add(
+          new window.ymaps.Placemark(
+            [56.451061, 84.964196],
+            { balloonContent: "г. Томск, улица Вершинина, д.74, ауд. 325" },
+            { preset: "islands#icon", iconColor: "#FFDD2D" }
+          )
+        );
+      });
+    }
+  },
+};
 </script>
 
 <style lang="less">
 .page-contacts {
   display: flex;
   flex-direction: column;
-  min-height: 80vh; /* Делаем страницу на всю высоту */
-  padding: 0 160px; /* Отступы только слева и справа */
-  
+  margin: 0;
   &__container {
+    .container();
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 100px;
   }
   &__title {
-    margin-bottom: 35px;
     color: @black;
     font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  &__subtitle{
+    font-family: @font3;
+    font-size: 25px;
+    font-style: italic;
   }
 
   &__text {
@@ -70,10 +95,13 @@ export default {};
   &__map {
     display: flex;
     justify-content: flex-end;
-    
-    img {
-      max-width: 550px; /* Уменьшаем размер карты */
-      height: auto;
+
+    .map-container {
+      width: 550px;
+      height: 400px;
+      border-radius: 20px; // Красивое скругление
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); // Небольшая тень для объёма
     }
   }
 }

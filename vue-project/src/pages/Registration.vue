@@ -36,10 +36,10 @@
           />
         </div>
         <button type="submit" class="reg__btn btn">Зарегистрироваться</button>
-      </form>
-      <p class="login-link">
+        <p class="login-link">
         <router-link to="/">Вернуться на главную</router-link>
       </p>
+      </form>
     </div>
   </template>
   
@@ -88,18 +88,15 @@
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
     text-align: center;
   
   &__text {
     font-family: @font1;
-    font-size: 24px;
+    font-size: 40px;
     margin-bottom: 20px;
   }
-  
   &__form {
+    margin-top: 15px;
     margin-bottom: 15px;
     text-align: left;
   }
@@ -122,11 +119,12 @@
   }
   
   &__btn {
-    padding: 10px 15px;
-    padding: 10px;
+    margin-top: 20px;
+    padding: 13px 13px 13px 13px;
     border: none;
     border-radius: 20px;
-    font-size: 16px;
+    font-size: 15px;
+    font-family: @font1;
     cursor: pointer;
     transition: background-color 0.3s ease;
     :hover {
