@@ -29,12 +29,12 @@
         </button>
       </div>
     </div>
-    <!-- Попап "Поделиться" -->
-    <ReferralPopup
+  </div>
+      <!-- Попап "Поделиться" -->
+      <ReferralPopup
       v-if="isSharePopupVisible"
       @close="isSharePopupVisible = false"
     />
-  </div>
 </template>
 
 <script>
