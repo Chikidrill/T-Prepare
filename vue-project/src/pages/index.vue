@@ -1,10 +1,12 @@
 <template>
   <div class="page-home">
+    <!-- Main content -->
     <div class="page-home__container">
-      <div class="page-home__about">
+      <!-- About section -->
+      <section id="about" class="page-home__about">
         <p class="page-home__text1">
           Освой любой экзамен <br>
-          вместе с T-Prepare 
+          вместе с T-Prepare
         </p>
         <p class="page-home__text2">
           Достигни максимальных результатов на экзаменах и забудь о бесконечной зубрёжке
@@ -12,170 +14,241 @@
         <button class="page-home__startbtn" @click="openLoginPopup">
           Начать подготовку
         </button>
+        <LoginPopup v-if="isLoginPopupVisible" @close="isLoginPopupVisible = false"/>
+        <div v-if="isLoginPopupVisible" class="blur-background"></div>
+      </section>
 
-         <LoginPopup v-if="isLoginPopupVisible" @close="isLoginPopupVisible = false"/>
-
-         <div v-if="isLoginPopupVisible" class="blur-background"></div>
-      </div>
-      <div class="page-home__problem">
-        <img class="page-home__problem-image" src="@/assets/dislike.png" />
-        <p class="page-home__problem-text"> 
-          Устали метаться между 
-          учебниками и дедлайнами?
-          Каждый знает это чувство: 
-          горы конспектов, паника 
-          от нехватки времени 
-          и бесконечное перечитывание 
-          одних и тех же страниц. 
-          Но что, если подготовка 
-          может быть другой? 
+      <!-- Problem section -->
+      <section class="page-home__problem">
+        <img class="page-home__problem-image" src="@/assets/dislike.png" alt="проблема" />
+        <p class="page-home__problem-text">
+          Устали метаться между учебниками и дедлайнами?
+          Каждый знает это чувство:
+          горы конспектов, паника от нехватки времени
+          и бесконечное перечитывание одних и тех же страниц.
+          Но что, если подготовка может быть другой?
         </p>
-      </div>
-      <div class="page-home__solve">
+      </section>
+
+      <!-- Solve section -->
+      <section class="page-home__solve">
         <p class="page-home__solve-text">
-          С <b>T-Prepare</b> подготовка к экзаменам становится проще, эффективнее и удобнее! 
-          Загрузи свой список вопросов    в сервис, создай персонализированные тесты 
-          и мгновенно поделись материалами с друзьями. 
+          С <b>T-Prepare</b> подготовка к экзаменам становится проще, эффективнее и удобнее!
+          Загрузи свой список вопросов в сервис, создай персонализированные тесты
+          и мгновенно поделись материалами с друзьями.
         </p>
-        <img class="page-home__solve-image" src="@/assets/solvepic.png" alt="solve">
-      </div>
+        <img class="page-home__solve-image" src="@/assets/solvepic.png" alt="решение" />
+      </section>
     </div>
   </div>
 </template>
 
 <script>
 import LoginPopup from '@/components/LoginPopUp.vue';
-
 export default {
-  components: {
-    LoginPopup, 
-  },
+  components: { LoginPopup },
   data() {
     return {
-      isLoginPopupVisible: false, 
+      isLoginPopupVisible: false,
+      isMenuOpen: false,
     };
   },
   methods: {
     openLoginPopup() {
-      this.isLoginPopupVisible = true; 
-    },
-  },
+      this.isLoginPopupVisible = true;
+    }
+  }
 };
 </script>
+
 <style lang="less">
+@import "src/styles/variables.less"; // содержит @bw768 и @w768 как "(max-width: 767px)" и "(min-width: 768px)"
 
 .page-home {
-  padding-left: 160px;
-  padding-right: 160px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0 160px;
   max-width: 1920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+
+    .logo {
+      font-family: @font1;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background: #000;
+      }
+    }
+  }
+
+  &__nav {
+    ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      font-family: @font3;
+      font-size: 18px;
+      text-decoration: none;
+      color: #000;
+    }
+    &.is-open { display: block; }
+  }
 
   &__container {
-    
-    justify-content: center;
-    align-items: center;
     width: 100%;
-  }
-    &__background-image {
-    position: fixed; /* Фиксируем фон */
-    top: 0;
-    left: 0;
-    width: 100vw; /* Занимает всю ширину экрана */
-    height: 100vh; /* Занимает всю высоту экрана */
-    overflow: hidden; /* Обрезает лишнее */
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    z-index: -1; /* Отправляем изображение назад */
-    }
+  }
+
   &__about {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; // Центрирование по вертикали
     text-align: center;
     margin-bottom: 100px;
-  }
 
-  &__text1 {
-    font-family: @font1;
-    font-size: 80px;
-    font-weight: 700;
-    margin-bottom: 25px;
-  }
-
-  &__text2 {
-    font-family: @font3;
-    font-size: 20px;
-    font-weight: 400;
-    margin-top: 0; // Убираем лишний отступ, если он есть
-    margin-bottom: 35px;
-  }
-  &__startbtn{
-    font-family: @font3;
-    font-size: 20px;
-    font-weight: 400;
-    background-color: @yellow;
-    border-radius: 25px;
-    padding: 20px 45px;
-    transition: all 0.5s ease ;
-    &:hover{
-      background-color: @black;
-      color: @white;
+    & .page-home__text1 {
+      font-family: @font1;
+      font-size: 80px;
+      font-weight: 700;
+      margin-bottom: 25px;
+    }
+    & .page-home__text2 {
+      font-family: @font3;
+      font-size: 20px;
+      font-weight: 400;
+      margin-bottom: 35px;
+    }
+    & .page-home__startbtn {
+      font-family: @font3;
+      font-size: 20px;
+      background-color: @yellow;
+      border-radius: 25px;
+      padding: 20px 45px;
+      transition: all 0.5s ease;
+      border: none;
+      cursor: pointer;
+      &:hover {
+        background-color: @black;
+        color: @white;
+      }
     }
   }
+
   &__problem {
     display: flex;
-    align-items: center; /* Выравниваем по центру вертикали */
-    justify-content: center; /* Центрируем по горизонтали */
-    gap: 300px; /* Отступ между картинкой и текстом */
+    align-items: center;
+    justify-content: center;
+    gap: 300px;
     padding-bottom: 70px;
+
+    &-image {
+      width: 350px;
+      height: 350px;
+    }
+    &-text {
+      font-family: @font3;
+      font-size: 25px;
+      text-align: right;
+      max-width: 500px;
+      line-height: 1.5;
+    }
   }
-  &__problem-image{
-    width: 350px;
-    height: 350px;
-  }
-  &__problem-text{
-    font-family: @font3;
-    font-size: 25px;
-    font-weight: 400;
-    margin-top: 0;
-    text-align: right; /* Выравниваем текст справа */
-    max-width: 500px; /* Ограничиваем ширину текста */
-  }
-  &__solve{
+
+  &__solve {
     display: flex;
-    align-items: center; /* Выравниваем по центру вертикали */
-    justify-content: center; /* Центрируем по горизонтали */
-    gap: 300px; /* Отступ между картинкой и текстом */
+    align-items: center;
+    justify-content: center;
+    gap: 300px;
     padding-bottom: 100px;
-    padding-left: 80px;
-  }
-  &__solve-image{
-    width: 350px;
-    height: 350px;
-  }
-  &__solve-text{
-    font-family: @font3;
-    font-size: 25px;
-    font-weight: 400;
-    margin-top: 0;
-    text-align: left; /* Выравниваем текст справа */
-    max-width: 500px; /* Ограничиваем ширину текста */
+
+    &-image {
+      width: 350px;
+      height: 350px;
+    }
+    &-text {
+      font-family: @font3;
+      font-size: 25px;
+      text-align: left;
+      max-width: 500px;
+      line-height: 1.5;
+    }
   }
 
   .blur-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
-  backdrop-filter: blur(5px); 
-  z-index: 999; 
-}
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+  }
 }
 
+// Mobile styles (<=767px)
+@media @bw768 {
+  .page-home {
+    padding: 0 20px;
+
+    &__header {
+      .burger { display: flex; }
+    }
+    &__nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: #fff;
+      ul { flex-direction: column; gap: 15px; padding: 10px; }
+      &.is-open { display: block; }
+    }
+
+    &__about,
+    &__problem,
+    &__solve {
+      flex-direction: column;
+      text-align: center;
+      gap: 20px;
+      padding-bottom: 40px;
+    }
+    .page-home__text1 { font-size: 32px; }
+    .page-home__text2 { font-size: 16px; }
+    .page-home__problem-image,
+    .page-home__solve-image { width: 200px; height: auto; }
+  }
+}
+
+// Desktop styles (>=768px)
+@media @w768 {
+  .page-home {
+    // здесь можно добавить специфичные десктоп-правила
+  }
+}
 </style>
