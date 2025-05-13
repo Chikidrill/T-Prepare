@@ -16,7 +16,7 @@
       <!-- Burger button -->
       <button
         class="page-header__burger"
-        @click="isMenuOpen = !isMenuOpen"
+        @click="isMenuOpen = !isMenuOpen" 
         aria-label="Toggle menu"
       >
         <span></span>
@@ -51,6 +51,22 @@ export default {
         { title: "Личный кабинет", path: "/personalaccount" }
       ]
     };
+  },
+  methods: {
+    handleOutsideClick(event) {
+      // Если меню открыто и клик вне бургер-кнопки и навигации, закрыть меню
+      const burger = this.$el.querySelector('.page-header__burger');
+      const nav = this.$el.querySelector('.page-header__nav');
+      if (this.isMenuOpen && !burger.contains(event.target) && !nav.contains(event.target)) {
+        this.isMenuOpen = false;
+      }
+    }
+  },
+  mounted() {
+    document.addEventListener('click', this.handleOutsideClick);
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.handleOutsideClick);
   }
 };
 </script>
@@ -109,16 +125,18 @@ export default {
       @media @bw768 {
         display: block;
         position: absolute;
+        text-align: right;
         top: 70px;
-        left: 0;
-        width: 100%;
-        background: rgba(255,221,45,0.9);
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
+        left: 0px;
+        right: 0;
+        background-color: rgba(212, 212, 212, 0.8);
+        backdrop-filter: blur(10px);
+        transition: background-color 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         .page-header__nav-item {
           display: block;
-          padding: 15px 20px;
-          border-bottom: 1px solid rgba(0,0,0,0.1);
+          padding: 15px 85px 15px 15px;
+         
         }
       }
     }
@@ -131,10 +149,6 @@ export default {
     text-decoration: none;
     text-transform: uppercase;
     transition: color 0.2s ease-out;
-
-    & + & {
-      margin-left: 103px;
-    }
 
     &:hover {
       @media (hover: hover) {
@@ -169,6 +183,8 @@ export default {
 // Desktop >= 768px
 @media @w768 {
   .page-header {
+    max-width: 100%;
+    
     &__burger {
       display: none;
     }
@@ -177,11 +193,12 @@ export default {
       position: static;
       width: auto;
       background: none;
-
+      
       .page-header__nav-item {
         display: inline-block;
         padding: 0;
         border: none;
+        
       }
     }
   }

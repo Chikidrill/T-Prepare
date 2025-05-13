@@ -102,5 +102,10 @@ export default {
     font-size: 15px;
   }
 }
-
+@media @bw768{
+  .page-footer{
+    margin: 0;
+  padding: 0;
+  }
+}
 </style>

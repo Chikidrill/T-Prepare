@@ -214,41 +214,37 @@ export default {
 // Mobile styles (<=767px)
 @media @bw768 {
   .page-home {
-    padding: 0 20px;
-
-    &__header {
-      .burger { display: flex; }
+    width: 100%;
+    padding: 0;
+    &__container{
+      
     }
-    &__nav {
-      display: none;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      background: #fff;
-      ul { flex-direction: column; gap: 15px; padding: 10px; }
-      &.is-open { display: block; }
+    &__about{
+      padding-top: 40px;
     }
 
-    &__about,
-    &__problem,
-    &__solve {
+    &__about{
       flex-direction: column;
       text-align: center;
       gap: 20px;
       padding-bottom: 40px;
+      margin-bottom: 20px;
     }
-    .page-home__text1 { font-size: 32px; }
+    &__problem,
+    &__solve{
+      flex-direction: row;
+      text-align: center;
+      gap: 20px;
+      padding-bottom: 40px;
+    }
+    .page-home__text1 { font-size: 32px; margin-bottom: 0;}
     .page-home__text2 { font-size: 16px; }
     .page-home__problem-image,
-    .page-home__solve-image { width: 200px; height: auto; }
-  }
-}
-
-// Desktop styles (>=768px)
-@media @w768 {
-  .page-home {
-    // здесь можно добавить специфичные десктоп-правила
+    .page-home__solve-image { width: 150px; height: auto; }
+    .page-home__problem-text,
+    .page-home__solve-text{
+      font-size: 20px;
+    }
   }
 }
 </style>
