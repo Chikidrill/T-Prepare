@@ -120,7 +120,7 @@ export default {
     display: flex;
     align-items: center;
     margin-left: auto;
-
+    gap: 50px;
     &.is-open {
       @media @bw768 {
         display: block;

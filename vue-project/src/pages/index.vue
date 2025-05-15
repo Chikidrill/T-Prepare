@@ -1,8 +1,6 @@
 <template>
   <div class="page-home">
-    <!-- Main content -->
     <div class="page-home__container">
-      <!-- About section -->
       <section id="about" class="page-home__about">
         <p class="page-home__text1">
           Освой любой экзамен <br>
@@ -71,51 +69,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  &__header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-
-    .logo {
-      font-family: @font1;
-      font-size: 28px;
-      font-weight: 700;
-    }
-    .burger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      span {
-        display: block;
-        width: 25px;
-        height: 3px;
-        background: #000;
-      }
-    }
-  }
-
-  &__nav {
-    ul {
-      display: flex;
-      gap: 30px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    a {
-      font-family: @font3;
-      font-size: 18px;
-      text-decoration: none;
-      color: #000;
-    }
-    &.is-open { display: block; }
-  }
 
   &__container {
     width: 100%;
@@ -216,9 +169,6 @@ export default {
   .page-home {
     width: 100%;
     padding: 0;
-    &__container{
-      
-    }
     &__about{
       padding-top: 40px;
     }
