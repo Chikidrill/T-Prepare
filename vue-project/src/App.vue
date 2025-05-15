@@ -30,9 +30,9 @@ export default {
 
 <style>
 html, body, #app {
-  height: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .layout {
@@ -46,7 +46,6 @@ html, body, #app {
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Центровка по вертикали при малом контенте */
   padding: 40px 0; /* Немного отступа, чтобы не прилипал */
 }
 
