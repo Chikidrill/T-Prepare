@@ -43,8 +43,7 @@ export default {
       isUploading: false // Флаг загрузки
     };
   },
-
-  methods: {
+methods: {
     triggerFileInput() {
       document.getElementById('fileInput').click();
     },

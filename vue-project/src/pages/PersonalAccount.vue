@@ -245,6 +245,16 @@ mounted() {
   &__user-content{
     gap: 100px;
   }
+    &__newblock-btn{
+    padding: 15px 10px;
+    border-radius: 15px;
+    font-size: 15px;
+    
+  }
+  &__newblock-icon{
+    width: 16px;
+    height: 12px;
+  }
   }
   
 }
