@@ -133,9 +133,9 @@ export default {
     .map-container {
       width: 100%;
       height: 400px;
-      border-radius: 10px; // Красивое скругление
+      border-radius: 10px; 
       overflow: hidden;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); // Небольшая тень для объёма
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
     }
   }
   }

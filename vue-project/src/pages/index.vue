@@ -169,7 +169,7 @@ export default {
   .page-home {
     width: 100%;
     padding: 0;
-    &__about{
+    &__content{
       padding-top: 40px;
     }
 
@@ -177,6 +177,7 @@ export default {
       flex-direction: column;
       text-align: center;
       gap: 20px;
+      padding-top:0px;
       padding-bottom: 40px;
       margin-bottom: 20px;
     }
@@ -187,7 +188,7 @@ export default {
       gap: 20px;
       padding-bottom: 40px;
     }
-    .page-home__text1 { font-size: 32px; margin-bottom: 0;}
+    .page-home__text1 { font-size: 32px; margin:0;}
     .page-home__text2 { font-size: 16px; }
     .page-home__problem-image,
     .page-home__solve-image { width: 150px; height: auto; }
