@@ -44,44 +44,53 @@
   </template>
   
   <script>
-  import axios from 'axios';
-  export default {
-    data() {
-      return {
-        username: "",
-        email: "",
-        password: "",
-      };
-    },
-      methods: {
-  async handleRegistration() {
-    try {
-      const response = await axios.post('http://127.0.0.1:8000/auth/register/', {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-      });
+import axios from 'axios';
+import auth from "@/store/auth"; // 👈 подключение хранилища
 
-      console.log("Регистрация прошла успешно:", response.data);
-
-
-      this.username = "";
-      this.email = "";
-      this.password = "";
-
-      this.$router.push({ name: 'home' }); 
-    } catch (error) {
-      if (error.response) {
-        console.error("Ошибка регистрации:", error.response.data);
-        alert("Ошибка регистрации: " + error.response.data.message);
-      } else {
-        console.error("Сетевая ошибка:", error.message);
-        alert("Произошла ошибка при регистрации. Попробуйте снова.");
-      }
-    }
+export default {
+  data() {
+    return {
+      username: "",
+      email: "",
+      password: "",
+    };
   },
-      }}
-  </script>
+  methods: {
+    async handleRegistration() {
+      try {
+        const response = await axios.post("http://127.0.0.1:8000/auth/register/", {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        });
+
+        console.log("Регистрация прошла успешно:", response.data);
+
+        const token = response.data.token; // 👈 предполагаем, что backend отдаёт токен
+        if (token) {
+          auth.login(token); // 👈 сохраняем токен в localStorage и в стейт
+          this.$router.push({ name: "personalaccount" }); // переходим в ЛК
+        } else {
+          alert("Токен не получен от сервера.");
+        }
+
+        this.username = "";
+        this.email = "";
+        this.password = "";
+      } catch (error) {
+        if (error.response) {
+          console.error("Ошибка регистрации:", error.response.data);
+          alert("Ошибка регистрации: " + (error.response.data.message || "Проверьте введённые данные"));
+        } else {
+          console.error("Сетевая ошибка:", error.message);
+          alert("Произошла ошибка при регистрации. Попробуйте снова.");
+        }
+      }
+    },
+  },
+};
+</script>
+
   
   <style lang="less">
   .reg {

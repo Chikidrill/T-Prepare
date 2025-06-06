@@ -71,29 +71,52 @@ export default {
     onBlur() {
       this.showHint = !this.email.includes('@');
     },
-    async handleLogin() {
-      if (!this.email.includes('@')) return;
-      try {
-        const formData = new FormData();
-        formData.append('username', this.email);
-        formData.append('password', this.password);
-        const response = await axios.post('http://127.0.0.1:8000/auth/login/', formData, {
-          headers: { 'Content-Type': 'multipart/form-data' },
-        });
-        if (!response.data.success) {
-          console.log("Успешный вход:", response.data);
-          this.closePopup();
-          localStorage.setItem('token', response.data.token);
-          this.$router.push({ name: 'personalaccount' });
-        } else {
-          console.error("Ошибка входа:", response.data.message);
-          alert(response.data.message);
-        }
-      } catch (error) {
-        console.error("Ошибка при входе:", error);
-        alert("Произошла ошибка при входе. Попробуйте снова.");
-      }
-    },
+async handleLogin() {
+  if (!this.email.includes('@')) {
+    alert("Введите корректный email.");
+    return;
+  }
+
+  if (!this.password) {
+    alert("Введите пароль.");
+    return;
+  }
+
+  const requestData = {
+    email: this.email,
+    password: this.password,
+  };
+
+  try {
+    const response = await axios({
+      method: 'post',
+      url: 'http://127.0.0.1:8000/auth/login/',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: requestData,
+      validateStatus: () => true  // отключаем автоматическую ошибку на 400+
+    });
+
+    console.log("Ответ от бэкенда:", response);
+
+    if (response.status === 200 && response.data.success) {
+      console.log("Успешный вход:", response.data);
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('username', response.data.user.username)
+      this.username = response.data.user.username;
+      this.closePopup();
+      this.$router.push({ name: 'personalaccount' });
+    } else {
+      const errorMsg = response.data?.detail || response.data?.message || "Ошибка входа.";
+      console.error("Ошибка входа:", errorMsg);
+      alert(errorMsg);
+    }
+  } catch (error) {
+    console.error("Ошибка при выполнении запроса:", error);
+    alert("Сетевая ошибка или сервер недоступен.");
+  }
+},
     handleRegister() {
       this.closePopup();
       this.$router.push({ name: "registration" });
