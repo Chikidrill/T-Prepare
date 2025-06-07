@@ -7,12 +7,12 @@ app = FastAPI()
 
 # Добавляем поддержку CORS
 origins = [
-    "http://localhost:5173",  # разрешаем запросы с этого фронтенд-хоста
+    "http://localhost:5173", "https://extraordinary-malasada-46eafc.netlify.app"  # разрешаем запросы с этого фронтенд-хоста
 ]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Разрешаем только твой фронтенд
+    allow_origins=["http://localhost:5173", "https://extraordinary-malasada-46eafc.netlify.app"],  # Разрешаем только твой фронтенд
     allow_credentials=True,
     allow_methods=["*"],  # Разрешаем все методы (GET, POST, PUT и т.д.)
     allow_headers=["*"],  # Разрешаем все заголовки
