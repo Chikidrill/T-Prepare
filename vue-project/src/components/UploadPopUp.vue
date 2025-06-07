@@ -84,7 +84,7 @@ async uploadToServer() {
 
       const formData = new FormData();
       formData.append("file", this.fileData, this.fileData.name);
-      formData.append("language", this.subjectName);
+      formData.append("subject", this.subjectName);
 
       const response = await fetch("https://t-prepai.onrender.com/process_test", {
         method: "POST",
