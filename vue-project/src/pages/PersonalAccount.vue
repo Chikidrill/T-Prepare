@@ -13,7 +13,7 @@
       </div>
       <div class="profile__user">
         <h1 class="profile__username">
-          Привет, {{ username }}!
+           Привет, {{ username ? username : 'гость' }}!
         </h1>
         <div class="profile__user-content">
           <p class="profile__user-text">Проверим твои знания?</p>
@@ -61,8 +61,11 @@ import UploadPopUp from '@/components/UploadPopUp.vue';
 export default {
   components: { QuestionCard, Popup, UploadPopUp },
   data() {
+     const name = localStorage.getItem('username');
+    console.log('username in data:', name);
     return {
-      username: "user",
+      username: name,
+      
       subjects: [
         { id: 1, name: 'Программирование', creationDate: new Date().toLocaleDateString(), questions: [] },
         { id: 2, name: 'Математика', creationDate: new Date().toLocaleDateString(), questions: [] }

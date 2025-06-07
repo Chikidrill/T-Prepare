@@ -60,11 +60,13 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 0;
+  
   &__container {
     .container();
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 75px;
   }
   &__title {
     color: @black;
