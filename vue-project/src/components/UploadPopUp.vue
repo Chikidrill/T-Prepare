@@ -59,18 +59,25 @@ methods: {
       if (file.type === "application/json") {
         try {
           this.jsonData = JSON.parse(e.target.result);
-
+          this.fileData = file; // Сохраняем файл для отправки
         } catch (err) {
           alert("Ошибка: неверный JSON-файл.");
         }
       } else {
-        this.fileData = file;
+        // Для TXT создаем новый File объект из содержимого
+        const content = e.target.result;
+        this.fileData = new File([content], file.name, { 
+          type: 'text/plain',
+          lastModified: new Date().getTime()
+        });
       }
     };
 
-    if (file.type === "text/plain") {
+    // Для всех текстовых форматов используем readAsText
+    if (file.type === "text/plain" || file.type === "application/json") {
       reader.readAsText(file);
     } else {
+      // Для бинарных форматов (DOC/DOCX) сохраняем как есть
       this.fileData = file;
     }
   } else {
