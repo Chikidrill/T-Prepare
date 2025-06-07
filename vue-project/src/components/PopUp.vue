@@ -41,6 +41,7 @@
 import ReferralPopup from './ReferalPopUp.vue';
 
 export default {
+  emits: ['close'],
   name: 'SubjectPopup',
   components: { ReferralPopup },
   props: {
@@ -57,14 +58,25 @@ export default {
       isClosing: false,
       isExpanded: false,
       isSharePopupVisible: false,
+      visibleQuestions: [],
       visibleCount: 10,
     };
   },
   computed: {
-    visibleQuestions() {
+  visibleQuestions() {
+    if (Array.isArray(this.questions)) {
       return this.questions.slice(0, this.visibleCount);
-    },
-  },
+    }
+    if (
+      this.questions &&
+      typeof this.questions === 'object' &&
+      Array.isArray(this.questions.questions)
+    ) {
+      return this.questions.questions.slice(0, this.visibleCount);
+    }
+    return [];
+  }
+},
   methods: {
     toggleQuestions() {
       this.isExpanded = !this.isExpanded;

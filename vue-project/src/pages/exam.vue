@@ -38,13 +38,27 @@
   <script>
   export default {
     data() {
-      return {
-        subject: this.$route.query.subject || 'Неизвестный предмет', // Получаем название из маршрута
-        questions: this.$route.query.questions ? JSON.parse(this.$route.query.questions) : [], // Получаем вопросы из маршрута
-        answers: {},  // Модель для сохранения выбранных вариантов
-        result:null,
-        resultMessage: '',
-      };
+        const raw = this.$route.query.questions;
+  let parsedQuestions = [];
+
+  try {
+    const parsed = raw ? JSON.parse(raw) : null;
+    if (parsed && parsed.questions) {
+      parsedQuestions = parsed.questions; // получаем массив из вложенного объекта
+    } else if (Array.isArray(parsed)) {
+      parsedQuestions = parsed;
+    }
+  } catch (e) {
+    console.error('Ошибка при парсинге вопросов:', e);
+  }
+
+  return {
+    subject: this.$route.query.subject || 'Неизвестный предмет',
+    questions: parsedQuestions,
+    answers: {},
+    result: null,
+    resultMessage: ''
+  };
     },
     computed: {
       randomQuestions() {
@@ -63,9 +77,16 @@
     methods: {
   // Составляем все варианты ответа (правильный + неправильные)
   allOptions(question) {
-  const correctAnswer = question.correct_answer;
-  return [correctAnswer, ...question.wrong_answers]; // Создаем массив с правильным и неправильными ответами
+  const correct = question.correct_answer;
+  const wrong = Array.isArray(question.wrong_answers) ? question.wrong_answers : [];
+
+  // Фильтруем все ответы
+  const all = [correct, ...wrong].filter(opt => opt && opt.trim());
+
+  // Перемешиваем
+  return all.sort(() => 0.5 - Math.random());
 },
+
 
 
   checkAnswers() {

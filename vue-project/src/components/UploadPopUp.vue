@@ -26,6 +26,7 @@
           </svg>
         </button>
         <div class="upload-popup__buttons">
+          <button @click="testConnection">Проверить соединение с сервером</button>
           <button class="upload__btn btn" @click="uploadToServer" :disabled="isUploading">Загрузить в формат QuizAI</button>
           <button class="upload__btn-alt btn" :disabled="isUploading">Загрузить в формат самопроверки</button>
         </div>
@@ -43,7 +44,8 @@ export default {
       isUploading: false // Флаг загрузки
     };
   },
-methods: {
+
+  methods: {
     triggerFileInput() {
       document.getElementById('fileInput').click();
     },
@@ -59,25 +61,18 @@ methods: {
       if (file.type === "application/json") {
         try {
           this.jsonData = JSON.parse(e.target.result);
-          this.fileData = file; // Сохраняем файл для отправки
+
         } catch (err) {
           alert("Ошибка: неверный JSON-файл.");
         }
       } else {
-        // Для TXT создаем новый File объект из содержимого
-        const content = e.target.result;
-        this.fileData = new File([content], file.name, { 
-          type: 'text/plain',
-          lastModified: new Date().getTime()
-        });
+        this.fileData = file;
       }
     };
 
-    // Для всех текстовых форматов используем readAsText
-    if (file.type === "text/plain" || file.type === "application/json") {
+    if (file.type === "text/plain") {
       reader.readAsText(file);
     } else {
-      // Для бинарных форматов (DOC/DOCX) сохраняем как есть
       this.fileData = file;
     }
   } else {
@@ -93,20 +88,10 @@ async uploadToServer() {
       formData.append("file", this.fileData, this.fileData.name);
       formData.append("subject", this.subjectName);
 
-      const controller = new AbortController();
-      const timeout = 120000; // 2 минуты в миллисекундах
-      
-      // Устанавливаем таймер для прерывания запроса
-      const timeoutId = setTimeout(() => controller.abort(), timeout);
-
       const response = await fetch("https://t-prepai.onrender.com/process_test", {
         method: "POST",
         body: formData,
-        signal: controller.signal // передаем сигнал для контроля
       });
-
-      // Отменяем таймаут, если запрос завершился вовремя
-      clearTimeout(timeoutId);
 
       if (response.ok) {
         const result = await response.json();
