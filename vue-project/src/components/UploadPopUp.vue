@@ -93,10 +93,20 @@ async uploadToServer() {
       formData.append("file", this.fileData, this.fileData.name);
       formData.append("subject", this.subjectName);
 
+      const controller = new AbortController();
+      const timeout = 120000; // 2 минуты в миллисекундах
+      
+      // Устанавливаем таймер для прерывания запроса
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
+
       const response = await fetch("https://t-prepai.onrender.com/process_test", {
         method: "POST",
         body: formData,
+        signal: controller.signal // передаем сигнал для контроля
       });
+
+      // Отменяем таймаут, если запрос завершился вовремя
+      clearTimeout(timeoutId);
 
       if (response.ok) {
         const result = await response.json();
